@@ -64,28 +64,35 @@ export default function TimeCounter() {
   }, []);
 
   return (
-    <div className="text-center space-y-4">
-      <h2 className="text-4xl md:text-5xl font-serif">every moment with you</h2>
-      <p className="text-white/70">
-        has slowly turned into something I never want to lose.
-      </p>
+    <div className="text-center space-y-6">
+      <div className="cozy-box p-8 max-w-lg mx-auto">
+        <h2
+          className="text-3xl md:text-4xl cozy-text mb-4"
+          style={{ fontFamily: "var(--font-dancing)" }}
+        >
+          every moment with you
+        </h2>
+        <p className="cozy-text text-sm leading-relaxed mb-6">
+          has slowly turned into something I never want to lose.
+        </p>
 
-      <div className="flex justify-center gap-6 mt-6 text-lg flex-wrap">
-        <div>
-          <p className="text-3xl font-semibold">{time.months}</p>
-          <p className="text-white/60">months</p>
-        </div>
-        <div>
-          <p className="text-3xl font-semibold">{time.days}</p>
-          <p className="text-white/60">days</p>
-        </div>
-        <div>
-          <p className="text-3xl font-semibold">{time.hours}</p>
-          <p className="text-white/60">hours</p>
-        </div>
-        <div>
-          <p className="text-3xl font-semibold">{time.minutes}</p>
-          <p className="text-white/60">minutes</p>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+            <p className="text-2xl cozy-text font-light">{time.months}</p>
+            <p className="cozy-text text-xs opacity-80">months</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+            <p className="text-2xl cozy-text font-light">{time.days}</p>
+            <p className="cozy-text text-xs opacity-80">days</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+            <p className="text-2xl cozy-text font-light">{time.hours}</p>
+            <p className="cozy-text text-xs opacity-80">hours</p>
+          </div>
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+            <p className="text-2xl cozy-text font-light">{time.minutes}</p>
+            <p className="cozy-text text-xs opacity-80">minutes</p>
+          </div>
         </div>
       </div>
     </div>

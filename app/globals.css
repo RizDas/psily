@@ -40,8 +40,10 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-dancing), cursive;
   overflow-x: hidden;
+  color: #f8e8e8;
+  scroll-behavior: smooth;
 }
 
 /* GLOBAL OVERLAY GLOW */
@@ -52,10 +54,14 @@ body {
   background:
     radial-gradient(
       circle at 25% 35%,
-      rgba(255, 182, 193, 0.12),
+      rgba(255, 182, 193, 0.15),
       transparent 60%
     ),
-    radial-gradient(circle at 75% 65%, rgba(0, 255, 200, 0.08), transparent 60%);
+    radial-gradient(
+      circle at 75% 65%,
+      rgba(255, 223, 186, 0.1),
+      transparent 60%
+    );
   pointer-events: none;
 }
 
@@ -143,4 +149,218 @@ body {
     transform: translateY(-20vh) rotate(45deg);
     opacity: 0;
   }
+}
+
+/*
+Source - https://stackoverflow.com/a/63615485
+Posted by Christophe, modified by community. See post 'Timeline' for change history
+Retrieved 2026-04-15, License - CC BY-SA 4.0
+*/
+
+#parchment-note {
+  /* center page with absolute position */
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  box-shadow:
+    2px 3px 15px rgba(0, 0, 0, 0.2),
+    0 0 65px #8a4d0fdd inset;
+  background: #fffef0;
+  filter: url(#wavy2);
+}
+
+/* SPARKLE ANIMATION */
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* SOFT FLOATING ELEMENTS */
+.soft-heart {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 182, 193, 0.4);
+  transform: rotate(45deg);
+  animation: softFloat 20s linear infinite;
+  opacity: 0.6;
+}
+
+.soft-heart::before,
+.soft-heart::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.soft-heart::before {
+  top: -4px;
+}
+.soft-heart::after {
+  left: -4px;
+}
+
+.soft-flower {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 218, 221, 0.5);
+  border-radius: 50%;
+  animation: softFloat 25s linear infinite;
+  opacity: 0.5;
+}
+
+.soft-flower::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 239, 213, 0.7);
+  border-radius: 50%;
+}
+
+@keyframes softFloat {
+  0% {
+    transform: translateY(120vh) rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-20vh) rotate(360deg) scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* COZY STYLES */
+.cozy-box {
+  background: rgba(255, 248, 240, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(255, 182, 193, 0.1);
+}
+
+.cozy-text {
+  color: #ffe4e1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cozy-button {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 182, 193, 0.2),
+    rgba(255, 223, 186, 0.2)
+  );
+  border: 1px solid rgba(255, 182, 193, 0.4);
+  border-radius: 25px;
+  color: #ffe4e1;
+  font-family: var(--font-dancing), cursive;
+  transition: all 0.3s ease;
+}
+
+.cozy-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 182, 193, 0.3),
+    rgba(255, 223, 186, 0.3)
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(255, 182, 193, 0.2);
+}
+
+/* PAPER TEXTURE & HANDWRITING */
+.paper-texture {
+  background-color: #fef8f1;
+  position: relative;
+  overflow: hidden;
+}
+
+.paper-texture::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 90, 43, 0.02) 2px,
+      rgba(139, 90, 43, 0.02) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 90, 43, 0.02) 2px,
+      rgba(139, 90, 43, 0.02) 4px
+    );
+  pointer-events: none;
+}
+
+.handwritten-text {
+  font-family: var(--font-cedarville), cursive;
+  letter-spacing: 0.08em;
+  word-spacing: 0.15em;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: #3d2817;
+  font-weight: 400;
+}
+
+.paper-crease {
+  position: absolute;
+  box-shadow:
+    inset -4px 0 8px rgba(0, 0, 0, 0.08),
+    inset 4px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.paper-aged {
+  background: linear-gradient(135deg, #fef8f1 0%, #fef3e6 50%, #fdefd2 100%);
+  border: 1px solid rgba(139, 90, 43, 0.2);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.paper-fold-effect {
+  position: relative;
+}
+
+.paper-fold-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
+  pointer-events: none;
+  border-bottom: 1px dashed rgba(139, 90, 43, 0.1);
 }

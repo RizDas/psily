@@ -9,17 +9,24 @@ export default function TimelinePage() {
 
       <section className="px-6 py-24">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h1 className="text-5xl md:text-6xl font-serif">Our Timeline</h1>
-          <p className="mt-4 text-white/70">
-            Every moment that slowly turned into us.
-          </p>
+          <div className="cozy-box p-6 max-w-md mx-auto">
+            <h1
+              className="text-4xl md:text-5xl cozy-text mb-4"
+              style={{ fontFamily: "var(--font-dancing)" }}
+            >
+              Our Timeline
+            </h1>
+            <p className="cozy-text text-sm leading-relaxed">
+              Every moment that slowly turned into us.
+            </p>
+          </div>
         </div>
 
         <div className="relative max-w-3xl mx-auto">
           {/* vertical line */}
-          <div className="absolute left-1/2 top-0 h-full w-[2px] bg-white/10 -translate-x-1/2" />
+          <div className="absolute left-1/2 top-0 h-full w-1 bg-gradient-to-b from-pink-300/50 via-white/30 to-pink-300/50 -translate-x-1/2 rounded-full" />
 
-          <div className="space-y-16">
+          <div className="space-y-12">
             {timeline.map((event, index) => (
               <div
                 key={event.id}
@@ -28,19 +35,29 @@ export default function TimelinePage() {
                 }`}
               >
                 <div className="w-1/2 px-4">
-                  <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl">
-                    <p className="text-sm text-white/50 mb-2">{event.date}</p>
-                    <h3 className="text-xl font-semibold mb-2">
+                  <div className="cozy-box p-6 hover:scale-105 transition-transform duration-300">
+                    <p
+                      className="cozy-text text-xs opacity-70 mb-2"
+                      style={{ fontFamily: "var(--font-dancing)" }}
+                    >
+                      {event.date}
+                    </p>
+                    <h3
+                      className="text-lg cozy-text mb-2"
+                      style={{ fontFamily: "var(--font-dancing)" }}
+                    >
                       {event.title}
                     </h3>
-                    <p className="text-white/80 text-sm leading-relaxed">
+                    <p className="cozy-text text-sm leading-relaxed opacity-90">
                       {event.description}
                     </p>
                   </div>
                 </div>
 
                 {/* dot */}
-                <div className="absolute left-1/2 -translate-x-1/2 w-4 h-4 bg-pink-300 rounded-full shadow-lg" />
+                <div className="absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-pink-300 to-rose-300 rounded-full shadow-lg border-2 border-white/50 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                </div>
               </div>
             ))}
           </div>
