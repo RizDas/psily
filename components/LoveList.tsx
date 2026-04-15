@@ -101,13 +101,25 @@ export default function LoveList() {
               {/* Old Paper */}
               <div
                 id="parchment-note"
-                className="relative bg-yellow-50 rounded-sm shadow-lg px-12 md:px-16 py-6 flex items-center justify-center"
+                className="relative bg-yellow-50 rounded-sm shadow-lg px-8 md:px-10 py-4 flex items-center justify-center"
               >
                 {/* Main text only */}
-                <p className="text-base md:text-lg text-amber-950 font-serif leading-relaxed tracking-wide whitespace-nowrap">
+                <p className="text-lg md:text-xl text-amber-950 font-serif leading-relaxed tracking-wide whitespace-nowrap">
                   {currentNote.text}
                 </p>
               </div>
+              {/* <svg>
+                <filter id="wavy2">
+                  <feTurbulence
+                    x="0"
+                    y="0"
+                    baseFrequency="0.02"
+                    numOctaves="5"
+                    seed="1"
+                  ></feTurbulence>
+                  <feDisplacementMap in="SourceGraphic" scale="8" />
+                </filter>
+              </svg> */}
             </div>
           )}
         </div>
