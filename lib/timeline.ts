@@ -23,9 +23,9 @@ export const timeline = [
   {
     id: 4,
     date: "1/4/2026",
-    title:
-      "SHE TOLD ME 'I LOVE YOU' & (also suffered from an april fool's prank)",
-    description: "The whisper in my ear! UFFF!",
+    title: "SHE TOLD ME 'I LOVE YOU'",
+    description:
+      "The whisper in my ear! UFFF! stole my heart once again, in the middle of the road",
   },
   {
     id: 5,
@@ -61,5 +61,20 @@ export const timeline = [
     title: "FIRST MEETUP",
     description:
       "I took a risk and tried to meet her while she was returning home. She looked absolutely stunning! We roamed for a while and had a lovely short time. SHE HELD MY ARM LIKE THAT !!💗 It was short but fun",
+  },
+
+  {
+    id: 10,
+    date: "14/4/2026",
+    title: "I went to her home",
+    description:
+      "very dangerous stunt, where i went to the field beside her home, and she came out, and silently look at each other, in this secretive mission",
+  },
+  {
+    id: 11,
+    date: "16/4/2026",
+    title: "Mark of Possesion :)",
+    description:
+      "I had to go to an interschool fest without her, so she gave me her special named keychain, and I wore her hair tie on my wrist, as a mark of possesion, both of which I absolutely love",
   },
 ];
