@@ -77,4 +77,11 @@ export const timeline = [
     description:
       "I had to go to an interschool fest without her, so she gave me her special named keychain, and I wore her hair tie on my wrist, as a mark of possesion, both of which I absolutely love",
   },
+  {
+    id: 12,
+    date: "18/4/2026",
+    title: "So umm...",
+    description:
+      "I went to her tution after a fest. We were um... roaming and then she hugged me AND pecked on my cheek. OH MY GOD AAAAAAAAAHHHHHHHHHH !!! 💞 I can't express it in words (also she liked the earrings i got for her)",
+  },
 ];
