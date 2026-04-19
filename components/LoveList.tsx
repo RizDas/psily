@@ -39,24 +39,24 @@ export default function LoveList() {
   };
 
   return (
-    <section className="min-h-screen px-6 py-24 flex items-center justify-center">
-      <div className="max-w-2xl w-full mx-auto">
+    <section className="min-h-screen px-4 sm:px-6 py-12 sm:py-24 flex items-center justify-center">
+      <div className="max-w-xs sm:max-w-sm md:max-w-2xl w-full mx-auto">
         {/* Title */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <h2
-            className="text-4xl md:text-5xl cozy-text text-center mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl cozy-text text-center mb-3 sm:mb-4"
             style={{ fontFamily: "var(--font-dancing)" }}
           >
             A Jar of Little Reasons
           </h2>
-          <p className="cozy-text text-lg opacity-90">
+          <p className="cozy-text text-sm sm:text-base md:text-lg opacity-90">
             Shake the note, open the paper, and read one small reason I love
             you.
           </p>
         </div>
 
         {/* Note Display Area */}
-        <div className="mb-16 perspective flex items-center justify-center min-h-0">
+        <div className="mb-12 sm:mb-16 perspective flex items-center justify-center min-h-0">
           {currentNote === null ? (
             // Empty State - Nothing shown
             <div />
@@ -77,10 +77,10 @@ export default function LoveList() {
                 <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-1/2 pointer-events-none" />
 
                 {/* Content */}
-                <div className="px-8 md:px-10 py-5 text-center flex flex-col items-center justify-center relative">
+                <div className="px-6 sm:px-8 md:px-10 py-4 sm:py-5 text-center flex flex-col items-center justify-center relative">
                   {/* Wax seal effect */}
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-400/40 to-red-600/30 border-2 border-red-400/50 flex items-center justify-center shadow-lg animate-pulse mb-2">
-                    <span className="text-lg">❤️</span>
+                  <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-gradient-to-br from-red-400/40 to-red-600/30 border-2 border-red-400/50 flex items-center justify-center shadow-lg animate-pulse mb-2">
+                    <span className="text-base sm:text-lg">❤️</span>
                   </div>
 
                   <p className="text-amber-900/60 text-xs font-serif">
@@ -104,10 +104,10 @@ export default function LoveList() {
               {/* Old Paper */}
               <div
                 id="parchment-note"
-                className="relative bg-yellow-50 rounded-sm shadow-lg px-8 md:px-10 py-4 flex items-center justify-center"
+                className="relative bg-yellow-50 rounded-sm shadow-lg px-6 sm:px-8 md:px-10 py-3 sm:py-4 flex items-center justify-center"
               >
                 {/* Main text only */}
-                <p className="text-lg md:text-xl text-amber-950 font-serif leading-relaxed tracking-wide whitespace-nowrap z-40">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-amber-950 font-serif leading-relaxed tracking-wide whitespace-nowrap z-40">
                   {currentNote.text}
                 </p>
               </div>
@@ -133,14 +133,14 @@ export default function LoveList() {
             <button
               onClick={pickRandomNote}
               disabled={isAnimating}
-              className={`px-8 py-4 bg-gradient-to-r from-white/15 to-white/10 hover:from-white/20 hover:to-white/15 disabled:from-white/5 disabled:to-white/5 border border-white/30 hover:border-white/50 cozy-text rounded-full font-serif text-lg transition-all duration-300 backdrop-blur-sm hover:shadow-xl active:scale-95 disabled:cursor-wait ${
+              className={`px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-white/15 to-white/10 hover:from-white/20 hover:to-white/15 disabled:from-white/5 disabled:to-white/5 border border-white/30 hover:border-white/50 cozy-text rounded-full font-serif text-base sm:text-lg transition-all duration-300 backdrop-blur-sm hover:shadow-xl active:scale-95 disabled:cursor-wait ${
                 isShaking ? "animate-shake" : ""
               }`}
             >
               {isAnimating ? "Shaking..." : "Shake & Pick"}
             </button>
           ) : (
-            <p className="text-white/50 text-sm font-serif">
+            <p className="text-white/50 text-xs sm:text-sm font-serif">
               Click the envelope to open
             </p>
           )}

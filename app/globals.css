@@ -37,6 +37,13 @@
   background-size: cover;
 }
 
+/* Mobile: Use scroll instead of fixed for better performance */
+@media (max-width: 768px) {
+  .bg-layer {
+    background-attachment: scroll;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -44,6 +51,16 @@ body {
   overflow-x: hidden;
   color: #f8e8e8;
   scroll-behavior: smooth;
+  line-height: 1.6;
+}
+
+/* Ensure proper text rendering on all devices */
+@media (max-width: 768px) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 }
 
 /* GLOBAL OVERLAY GLOW */
@@ -158,7 +175,7 @@ body {
 
   box-shadow:
     2px 3px 15px rgba(0, 0, 0, 0.2),
-    0 0 65px #8a4d0fee inset;
+    0 0 65px #8a4d0fa9 inset;
   background: #fffef0;
   filter: url(#wavy2);
 }
@@ -188,8 +205,8 @@ body {
 /* SOFT FLOATING ELEMENTS */
 .soft-heart {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: rgba(255, 182, 193, 0.4);
   transform: rotate(45deg);
   animation: softFloat 20s linear infinite;
@@ -200,23 +217,23 @@ body {
 .soft-heart::after {
   content: "";
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   background: inherit;
   border-radius: 50%;
 }
 
 .soft-heart::before {
-  top: -4px;
+  top: -3px;
 }
 .soft-heart::after {
-  left: -4px;
+  left: -3px;
 }
 
 .soft-flower {
   position: absolute;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   background: rgba(255, 218, 221, 0.5);
   border-radius: 50%;
   animation: softFloat 25s linear infinite;
@@ -226,10 +243,10 @@ body {
 .soft-flower::before {
   content: "";
   position: absolute;
-  top: 3px;
-  left: 3px;
-  width: 6px;
-  height: 6px;
+  top: 2.5px;
+  left: 2.5px;
+  width: 5px;
+  height: 5px;
   background: rgba(255, 239, 213, 0.7);
   border-radius: 50%;
 }
@@ -251,6 +268,14 @@ body {
   }
 }
 
+/* Hide floating elements on very small screens to prevent interference */
+@media (max-width: 480px) {
+  .soft-heart,
+  .soft-flower {
+    display: none;
+  }
+}
+
 /* COZY STYLES */
 .cozy-box {
   background: rgba(255, 248, 240, 0.1);
@@ -258,6 +283,14 @@ body {
   border: 1px solid rgba(255, 182, 193, 0.3);
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(255, 182, 193, 0.1);
+}
+
+/* Responsive cozy-box adjustments */
+@media (max-width: 640px) {
+  .cozy-box {
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(255, 182, 193, 0.1);
+  }
 }
 
 .cozy-text {
