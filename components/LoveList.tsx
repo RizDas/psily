@@ -69,7 +69,10 @@ export default function LoveList() {
               } ${isAnimating ? "opacity-0 scale-75" : "opacity-100 scale-100"}`}
             >
               {/* Folded Paper Note */}
-              <div className="relative bg-yellow-50 rounded-sm shadow-lg overflow-hidden border border-yellow-200/30 hover:shadow-xl transition-all duration-300">
+              <div
+                id="parchment-note"
+                className="relative bg-yellow-50 rounded-sm shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+              >
                 {/* Fold line effect */}
                 <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-1/2 pointer-events-none" />
 
@@ -104,7 +107,7 @@ export default function LoveList() {
                 className="relative bg-yellow-50 rounded-sm shadow-lg px-8 md:px-10 py-4 flex items-center justify-center"
               >
                 {/* Main text only */}
-                <p className="text-lg md:text-xl text-amber-950 font-serif leading-relaxed tracking-wide whitespace-nowrap">
+                <p className="text-lg md:text-xl text-amber-950 font-serif leading-relaxed tracking-wide whitespace-nowrap z-40">
                   {currentNote.text}
                 </p>
               </div>

@@ -1,7 +1,7 @@
 export const loveList = [
   {
     id: 1,
-    text: "your infectious laugh.",
+    text: "your infectious laugh",
   },
   {
     id: 2,
@@ -9,15 +9,15 @@ export const loveList = [
   },
   {
     id: 3,
-    text: "the way you hold my arm.",
+    text: "the way you hold my arm",
   },
   {
     id: 4,
-    text: "that 'you are mine' grip",
+    text: "that 'you are mine' look",
   },
   {
     id: 5,
-    text: "when you can't hide a blush.",
+    text: "when you can't hide a blush",
   },
   {
     id: 6,
@@ -41,7 +41,7 @@ export const loveList = [
   },
   {
     id: 11,
-    text: "your tiny, soft hands in mine",
+    text: "your tiny, soft hands",
   },
   {
     id: 12,
@@ -53,7 +53,7 @@ export const loveList = [
   },
   {
     id: 14,
-    text: "how you lean in to whisper",
+    text: "how you lean in to whisper in my ears",
   },
   {
     id: 15,
@@ -85,7 +85,7 @@ export const loveList = [
   },
   {
     id: 22,
-    text: "how you pay complete attention to me.",
+    text: "how you pay complete attention to me",
   },
   {
     id: 23,

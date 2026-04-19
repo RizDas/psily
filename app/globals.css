@@ -158,7 +158,7 @@ body {
 
   box-shadow:
     2px 3px 15px rgba(0, 0, 0, 0.2),
-    0 0 65px #8a4d0fdd inset;
+    0 0 65px #8a4d0fee inset;
   background: #fffef0;
   filter: url(#wavy2);
 }
