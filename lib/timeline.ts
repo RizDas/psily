@@ -11,7 +11,7 @@ export const timeline = [
     date: "25/3/2026",
     title: "Our Hands Brushed",
     description:
-      "A small moment that stayed longer than it should… and slowly became everything.",
+      "A small moment, but enough to make me go crazy and jumping all around",
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ export const timeline = [
     date: "1/4/2026",
     title: "SHE TOLD ME 'I LOVE YOU'",
     description:
-      "The whisper in my ear! UFFF! stole my heart once again, in the middle of the road",
+      "The whisper in my ear, for the very first time! UFFF! stole my heart once again, in the middle of the road",
   },
   {
     id: 5,
@@ -46,14 +46,14 @@ export const timeline = [
     date: "3/4/2026",
     title: "OMG Video Call",
     description:
-      "We were feeling very lonely, and she had a brilliant idea to video call. It was the first time we saw each other online, and it was amazing.",
+      "We were feeling very lonely, and she had a brilliant idea to video call. It was the first time we saw each other online, and it was AMAZING",
   },
   {
     id: 8,
     date: "7/4/2026",
     title: "I kissed her hand",
     description:
-      "I was a little down, but then she was comforting me and i felt like kissing her soft hands.",
+      "I was a little down, but then she was comforting me and i felt like kissing her soft hands, again and again and again",
   },
   {
     id: 9,
@@ -68,7 +68,7 @@ export const timeline = [
     date: "14/4/2026",
     title: "I went to her home",
     description:
-      "very dangerous stunt, where i went to the field beside her home, and she came out, and silently look at each other, in this secretive mission",
+      "very dangerous stunt, where i went to the field beside her home, and she came out, and silently look at each other, in this secretive mission. It was a craxy risk, but every second was worth it",
   },
   {
     id: 11,
@@ -82,6 +82,13 @@ export const timeline = [
     date: "18/4/2026",
     title: "So umm...",
     description:
-      "I went to her tution after a fest. We were um... roaming and then she hugged me AND PECKED on my cheek. OH MY GOD AAAAAAAAAHHHHHHHHHH !!! 💞 I can't express it in words (also she liked the earrings i got for her)",
+      "I went to her tution after a fest. We were um... roaming and then she HUGGED me and PECKED on my cheek. OH MY GOD AAAAAAAAAHHHHHHHHHH !!! 💞 I can't express it in words (also she liked the earrings i got for her)",
+  },
+  {
+    id: 13,
+    date: "21/4/2026",
+    title: "Hand Drawing",
+    description:
+      "she wrote on my left palm, 'The Love of my Life: MS' !! I wanted to show it to everyone, but controlled the urge with my sheer willpower. Also, I GOT HER SCRUNCHIE (in exchange for hairtie)",
   },
 ];
