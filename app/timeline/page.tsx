@@ -6,8 +6,9 @@ export default function TimelinePage() {
       {/* same warm background */}
       <div className="fixed inset-0 -z-10 bg-layer" />
 
-      <section style={{ padding: "clamp(64px, 10vw, 100px) clamp(24px, 6vw, 80px)" }}>
-
+      <section
+        style={{ padding: "clamp(64px, 10vw, 100px) clamp(24px, 6vw, 80px)" }}
+      >
         {/* Header — no box, just text */}
         <div style={{ maxWidth: "640px", margin: "0 auto 72px" }}>
           <h1
@@ -57,9 +58,14 @@ export default function TimelinePage() {
             }}
           />
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "56px" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "56px" }}
+          >
             {timeline.map((event) => (
-              <div key={event.id} style={{ position: "relative", display: "flex", gap: "0" }}>
+              <div
+                key={event.id}
+                style={{ position: "relative", display: "flex", gap: "0" }}
+              >
                 {/* dot on spine */}
                 <div
                   style={{
@@ -80,7 +86,7 @@ export default function TimelinePage() {
                   <p
                     style={{
                       fontFamily: "var(--font-geist-sans), sans-serif",
-                      fontSize: "0.68rem",
+                      fontSize: "0.8rem",
                       letterSpacing: "0.14em",
                       textTransform: "uppercase",
                       color: "#9a6040",
