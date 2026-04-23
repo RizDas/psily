@@ -154,9 +154,8 @@ export default function Home() {
               maxWidth: "420px",
             }}
           >
-            the exact shade of green you reach for without thinking. That
-            particular teal. I know it. I look for it everywhere. It feels like
-            you.
+            the exact shade of green you love to see. That particular teal. I
+            know it. I look for it everywhere. It feels like you.
           </p>
         </div>
       </section>
