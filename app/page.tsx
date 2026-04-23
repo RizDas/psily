@@ -3,6 +3,7 @@
 import TimeCounter from "@/components/TimeCounter";
 import LoveList from "@/components/LoveList";
 import LoveLetter from "@/components/LoveLetter";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -11,18 +12,45 @@ export default function Home() {
       <div className="fixed inset-0 -z-10 bg-layer">
         <div
           className="petal"
-          style={{ left: "10%", width: "13px", height: "8px", background: "rgba(200, 125, 135, 0.28)", animationDuration: "30s", animationDelay: "0s" }}
+          style={{
+            left: "10%",
+            width: "13px",
+            height: "8px",
+            background: "rgba(200, 125, 135, 0.28)",
+            animationDuration: "30s",
+            animationDelay: "0s",
+          }}
         />
         <div
           className="petal"
-          style={{ left: "55%", width: "9px", height: "6px", background: "rgba(190, 115, 125, 0.22)", animationDuration: "38s", animationDelay: "14s" }}
+          style={{
+            left: "55%",
+            width: "9px",
+            height: "6px",
+            background: "rgba(190, 115, 125, 0.22)",
+            animationDuration: "38s",
+            animationDelay: "14s",
+          }}
         />
         <div
           className="petal"
-          style={{ left: "82%", width: "11px", height: "7px", background: "rgba(195, 120, 130, 0.2)", animationDuration: "34s", animationDelay: "24s" }}
+          style={{
+            left: "82%",
+            width: "11px",
+            height: "7px",
+            background: "rgba(195, 120, 130, 0.2)",
+            animationDuration: "34s",
+            animationDelay: "24s",
+          }}
         />
-        <div className="soft-heart" style={{ left: "28%", animationDelay: "6s" }} />
-        <div className="soft-heart" style={{ left: "70%", animationDelay: "19s" }} />
+        <div
+          className="soft-heart"
+          style={{ left: "28%", animationDelay: "6s" }}
+        />
+        <div
+          className="soft-heart"
+          style={{ left: "70%", animationDelay: "19s" }}
+        />
       </div>
 
       {/* ── HERO ───────────────────────────────────────────── */}
@@ -86,7 +114,10 @@ export default function Home() {
       <LoveList />
 
       {/* ── HER COLOUR ─────────────────────────────────────── */}
-      <section className="her-section" style={{ padding: "80px clamp(24px, 6vw, 80px)" }}>
+      <section
+        className="her-section"
+        style={{ padding: "80px clamp(24px, 6vw, 80px)" }}
+      >
         <div style={{ maxWidth: "520px", margin: "0 auto" }}>
           <p
             style={{
@@ -123,9 +154,9 @@ export default function Home() {
               maxWidth: "420px",
             }}
           >
-            the exact shade of green you reach for without thinking.
-            That particular teal. I know it. I look for it everywhere.
-            It feels like you.
+            the exact shade of green you reach for without thinking. That
+            particular teal. I know it. I look for it everywhere. It feels like
+            you.
           </p>
         </div>
       </section>
@@ -165,8 +196,22 @@ export default function Home() {
         >
           this is only the beginning of everything I want to give you.
         </p>
+        <Link
+          href="/timeline"
+          style={{
+            fontFamily: "var(--font-lora)",
+            fontStyle: "italic",
+            fontSize: "6px",
+            color: "#6a2840",
+            opacity: 0.7,
+            maxWidth: "340px",
+            lineHeight: 5,
+          }}
+        >
+          P.S. click here once
+        </Link>
 
-        <span className="thin-rule" style={{ marginTop: "40px" }} />
+        <span className="thin-rule" style={{ marginTop: "30px" }} />
       </section>
     </main>
   );
