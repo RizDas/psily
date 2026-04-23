@@ -4,27 +4,18 @@ import { loveList } from "@/lib/loveList";
 import { useState } from "react";
 
 export default function LoveList() {
-  const [currentNote, setCurrentNote] = useState<{
-    id: number;
-    text: string;
-  } | null>(null);
-  const [isSealed, setIsSealed] = useState(true);
-  const [isShaking, setIsShaking] = useState(false);
+  const [currentNote, setCurrentNote] = useState<{ id: number; text: string } | null>(null);
+  const [isSealed, setIsSealed]       = useState(true);
+  const [isShaking, setIsShaking]     = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
   const pickRandomNote = () => {
     setIsShaking(true);
     setIsAnimating(true);
-
-    // Shake effect
+    setTimeout(() => setIsShaking(false), 220);
     setTimeout(() => {
-      setIsShaking(false);
-    }, 200);
-
-    // Pick and show sealed envelope after dramatic pause
-    setTimeout(() => {
-      const randomIndex = Math.floor(Math.random() * loveList.length);
-      setCurrentNote(loveList[randomIndex]);
+      const i = Math.floor(Math.random() * loveList.length);
+      setCurrentNote(loveList[i]);
       setIsSealed(true);
       setIsAnimating(false);
     }, 600);
@@ -32,140 +23,168 @@ export default function LoveList() {
 
   const openEnvelope = () => {
     setIsAnimating(true);
-    setTimeout(() => {
-      setIsSealed(false);
-      setIsAnimating(false);
-    }, 500);
+    setTimeout(() => { setIsSealed(false); setIsAnimating(false); }, 450);
   };
 
   return (
-    <section className="min-h-screen px-4 sm:px-6 py-12 sm:py-24 flex items-center justify-center">
-      <div className="max-w-xs sm:max-w-sm md:max-w-2xl w-full mx-auto">
-        {/* Title */}
-        <div className="text-center mb-8 sm:mb-12">
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl cozy-text text-center mb-3 sm:mb-4"
-            style={{ fontFamily: "var(--font-dancing)" }}
-          >
-            A Jar of Little Reasons
-          </h2>
-          <p className="cozy-text text-sm sm:text-base md:text-lg opacity-90">
-            Shake the note, open the paper, and read one small reason I love
-            you.
-          </p>
-        </div>
+    <section
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "60px clamp(24px, 6vw, 80px)",
+      }}
+    >
+      <div style={{ maxWidth: "480px", width: "100%", margin: "0 auto", textAlign: "center" }}>
 
-        {/* Note Display Area */}
-        <div className="mb-12 sm:mb-16 perspective flex items-center justify-center min-h-0">
-          {currentNote === null ? (
-            // Empty State - Nothing shown
-            <div />
-          ) : isSealed ? (
-            // Sealed Envelope State
+        <h2
+          style={{
+            fontFamily: "var(--font-dancing)",
+            fontSize: "clamp(2rem, 5vw, 3rem)",
+            color: "#3e1c2a",
+            lineHeight: 1.2,
+            marginBottom: "10px",
+          }}
+        >
+          A Jar of Little Reasons
+        </h2>
+        <p
+          style={{
+            fontFamily: "var(--font-lora)",
+            fontStyle: "italic",
+            fontSize: "clamp(0.88rem, 1.6vw, 0.98rem)",
+            color: "#7a3848",
+            opacity: 0.7,
+            marginBottom: "52px",
+            lineHeight: 1.7,
+          }}
+        >
+          Shake it, open it, read one small reason I love you.
+        </p>
+
+        {/* Note area */}
+        <div style={{ minHeight: "120px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "36px" }}>
+          {currentNote === null ? null : isSealed ? (
+            /* sealed slip */
             <div
               onClick={openEnvelope}
-              className={`relative cursor-pointer transition-all duration-300 ${
-                isShaking ? "animate-shake" : ""
-              } ${isAnimating ? "opacity-0 scale-75" : "opacity-100 scale-100"}`}
+              className={isShaking ? "shake" : ""}
+              style={{
+                cursor: "pointer",
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? "scale(0.9)" : "scale(1)",
+                transition: "all 0.3s ease",
+              }}
             >
-              {/* Folded Paper Note */}
               <div
-                id="parchment-note"
-                className="relative bg-yellow-50 rounded-sm shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
+                className="note-paper"
+                style={{
+                  padding: "22px 36px",
+                  borderRadius: "6px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  gap: "10px",
+                  minWidth: "180px",
+                }}
               >
-                {/* Fold line effect */}
-                <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent h-1/2 pointer-events-none" />
-
-                {/* Content */}
-                <div className="px-6 sm:px-8 md:px-10 py-4 sm:py-5 text-center flex flex-col items-center justify-center relative">
-                  {/* Wax seal effect */}
-                  <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-gradient-to-br from-red-400/40 to-red-600/30 border-2 border-red-400/50 flex items-center justify-center shadow-lg animate-pulse mb-2">
-                    <span className="text-base sm:text-lg">❤️</span>
-                  </div>
-
-                  <p className="text-amber-900/60 text-xs font-serif">
-                    Click to open
-                  </p>
+                {/* simple wax blob */}
+                <div
+                  style={{
+                    width: "36px",
+                    height: "36px",
+                    borderRadius: "50%",
+                    background: "radial-gradient(circle at 38% 36%, #d46050, #a03828)",
+                    border: "2px solid rgba(255,200,185,0.4)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "rgba(255,230,220,0.9)",
+                    fontSize: "12px",
+                  }}
+                >
+                  ♥
                 </div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-geist-sans), sans-serif",
+                    fontSize: "0.7rem",
+                    letterSpacing: "0.1em",
+                    color: "#8a4050",
+                    opacity: 0.6,
+                  }}
+                >
+                  tap to open
+                </p>
               </div>
             </div>
           ) : (
-            // Open Letter State
+            /* open note — slight tilt, feels found */
             <div
-              className={`relative transition-all duration-500 ${
-                isAnimating
-                  ? "opacity-0 scale-75 -rotate-45"
-                  : "opacity-100 scale-100 rotate-0"
-              }`}
               style={{
-                transformOrigin: "center",
+                opacity: isAnimating ? 0 : 1,
+                transform: isAnimating ? "scale(0.9) rotate(-4deg)" : "rotate(-1.5deg)",
+                transition: "all 0.45s ease",
               }}
             >
-              {/* Old Paper */}
               <div
-                id="parchment-note"
-                className="relative bg-yellow-50 rounded-sm shadow-lg px-6 sm:px-8 md:px-10 py-3 sm:py-4 flex items-center justify-center"
+                className="note-paper"
+                style={{
+                  padding: "28px 36px",
+                  borderRadius: "5px",
+                  maxWidth: "380px",
+                }}
               >
-                {/* Main text only */}
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-amber-950 font-serif leading-relaxed tracking-wide whitespace-nowrap z-40">
+                <p
+                  style={{
+                    fontFamily: "var(--font-lora)",
+                    fontStyle: "italic",
+                    fontSize: "clamp(0.95rem, 2vw, 1.08rem)",
+                    color: "#3e1c2a",
+                    lineHeight: 1.9,
+                    letterSpacing: "0.01em",
+                  }}
+                >
                   {currentNote.text}
                 </p>
               </div>
-              {/* <svg>
-                <filter id="wavy2">
-                  <feTurbulence
-                    x="0"
-                    y="0"
-                    baseFrequency="0.02"
-                    numOctaves="5"
-                    seed="1"
-                  ></feTurbulence>
-                  <feDisplacementMap in="SourceGraphic" scale="8" />
-                </filter>
-              </svg> */}
             </div>
           )}
         </div>
 
-        {/* Action Button with shake animation */}
-        <div className="text-center">
-          {currentNote === null || !isSealed ? (
-            <button
-              onClick={pickRandomNote}
-              disabled={isAnimating}
-              className={`px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-white/15 to-white/10 hover:from-white/20 hover:to-white/15 disabled:from-white/5 disabled:to-white/5 border border-white/30 hover:border-white/50 cozy-text rounded-full font-serif text-base sm:text-lg transition-all duration-300 backdrop-blur-sm hover:shadow-xl active:scale-95 disabled:cursor-wait ${
-                isShaking ? "animate-shake" : ""
-              }`}
-            >
-              {isAnimating ? "Shaking..." : "Shake & Pick"}
-            </button>
-          ) : (
-            <p className="text-white/50 text-xs sm:text-sm font-serif">
-              Click the envelope to open
-            </p>
-          )}
-        </div>
+        {/* Button */}
+        {currentNote === null || !isSealed ? (
+          <button
+            onClick={pickRandomNote}
+            disabled={isAnimating}
+            className={`ghost-btn ${isShaking ? "shake" : ""}`}
+          >
+            {isAnimating ? "picking one…" : "shake & pick"}
+          </button>
+        ) : (
+          <p
+            style={{
+              fontFamily: "var(--font-lora)",
+              fontStyle: "italic",
+              fontSize: "0.82rem",
+              color: "#8a3858",
+              opacity: 0.5,
+            }}
+          >
+            tap the note to open it
+          </p>
+        )}
       </div>
 
       <style jsx>{`
-        @keyframes animate-shake {
-          0%,
-          100% {
-            transform: translateX(0) rotate(0deg);
-          }
-          25% {
-            transform: translateX(-8px) rotate(-1deg);
-          }
-          50% {
-            transform: translateX(8px) rotate(1deg);
-          }
-          75% {
-            transform: translateX(-8px) rotate(-1deg);
-          }
+        @keyframes shake {
+          0%, 100% { transform: translateX(0) rotate(0deg); }
+          25%       { transform: translateX(-7px) rotate(-1.5deg); }
+          50%       { transform: translateX(7px) rotate(1.5deg); }
+          75%       { transform: translateX(-5px) rotate(-0.8deg); }
         }
-        .animate-shake {
-          animation: animate-shake 0.3s ease-in-out;
-        }
+        .shake { animation: shake 0.28s ease-in-out; }
       `}</style>
     </section>
   );
