@@ -68,7 +68,7 @@ export default function Home() {
             marginBottom: "28px",
           }}
         >
-          Our Story
+          I belong to Manushree and She is Mine, forever
         </h1>
 
         <span className="thin-rule" style={{ marginBottom: "28px" }} />
@@ -84,7 +84,7 @@ export default function Home() {
             lineHeight: 1.7,
           }}
         >
-          somehow, somewhere — it all became you.
+          somehow, somewhere — you and I, became WE.
         </p>
 
         <p
