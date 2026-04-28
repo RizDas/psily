@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import "./globals.css";
 import {
   Geist,
   Cedarville_Cursive,
   Dancing_Script,
   Lora,
 } from "next/font/google";
-import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,7 +35,7 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "P.S. I Love You",
+  title: "HAPPY BIRTHDAY ❤️",
   description: "A loving website",
 };
 
