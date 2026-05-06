@@ -112,7 +112,13 @@ export const timeline = [
   {
     id: 17,
     date: "2/5/2026",
-    title: "gitanjali",
+    title: "tiffin and gitanjali",
+    description: "",
+  },
+  {
+    id: 18,
+    date: "2/5/2026",
+    title: "auto and specs",
     description: "",
   },
 ];
