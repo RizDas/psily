@@ -246,7 +246,7 @@ export default function TimeCounter() {
             letterSpacing: "0.01em",
           }}
         >
-          {totalDays}
+          {totalDays - 1}
         </span>
         <span
           style={{
