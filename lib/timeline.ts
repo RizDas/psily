@@ -117,7 +117,7 @@ export const timeline = [
   },
   {
     id: 18,
-    date: "2/5/2026",
+    date: "6/5/2026",
     title: "auto and specs",
     description: "",
   },
