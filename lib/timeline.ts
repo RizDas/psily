@@ -94,31 +94,31 @@ export const timeline = [
   {
     id: 14,
     date: "24/4/2026",
-    title: "",
-    description: "",
+    title: "...",
+    description: "to be written-",
   },
   {
     id: 15,
     date: "25/4/2026",
-    title: "",
-    description: "",
+    title: "...",
+    description: "to be written-",
   },
   {
     id: 16,
     date: "28/4/2026",
     title: "near home meet and warning",
-    description: "",
+    description: "to be written-",
   },
   {
     id: 17,
     date: "2/5/2026",
     title: "tiffin and gitanjali",
-    description: "",
+    description: "to be written-",
   },
   {
     id: 18,
     date: "6/5/2026",
     title: "auto and specs",
-    description: "",
+    description: "to be written-",
   },
 ];
