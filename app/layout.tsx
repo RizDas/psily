@@ -42,7 +42,7 @@ const lora = Lora({
 
 export const metadata: Metadata = {
   title: "P.S. I Love You",
-  description: "A loving website",
+  description: "Website just for her :)",
 };
 
 export default function RootLayout({
