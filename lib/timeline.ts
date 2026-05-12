@@ -121,4 +121,10 @@ export const timeline = [
     title: "auto and specs",
     description: "to be written-",
   },
+  {
+    id: 19,
+    date: "10/5/2026",
+    title: "best bday ever",
+    description: "to be written-",
+  },
 ];
