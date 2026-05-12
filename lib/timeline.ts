@@ -43,7 +43,7 @@ export const timeline = [
   },
   {
     id: 7,
-    date: "3/4/2026",
+    date: "5/4/2026",
     title: "OMG Video Call",
     description:
       "We were feeling very lonely, and she had a brilliant idea to video call. It was the first time we saw each other online, and it was AMAZING",

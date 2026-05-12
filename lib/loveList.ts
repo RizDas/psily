@@ -147,4 +147,56 @@ export const loveList = [
     id: 37,
     text: "the way you're my safe spot",
   },
+  {
+    id: 38,
+    text: "how you trace your lips",
+  },
+  {
+    id: 39,
+    text: "when you call me your favourite",
+  },
+  {
+    id: 40,
+    text: "the way you get mad",
+  },
+  {
+    id: 41,
+    text: "your soft whispers",
+  },
+  {
+    id: 42,
+    text: "how you know what I'm thinking",
+  },
+  {
+    id: 43,
+    text: "when you play with my hair",
+  },
+  {
+    id: 44,
+    text: "that smirk when you're right",
+  },
+  {
+    id: 45,
+    text: "how you fit perfectly against me",
+  },
+  {
+    id: 46,
+    text: "the way you hype me up",
+  },
+  {
+    id: 47,
+    text: "your playful teasing",
+  },
+  {
+    id: 48,
+    text: "how you kiss me",
+  },
+  {
+    id: 49,
+    text: "when you trace patterns on my skin",
+  },
+  {
+    id: 50,
+    text: "how you're my favorite person",
+  },
 ];
