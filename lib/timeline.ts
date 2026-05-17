@@ -127,4 +127,10 @@ export const timeline = [
     title: "best bday ever",
     description: "to be written-",
   },
+  {
+    id: 20,
+    date: "16/5/2026",
+    title: "end of bday week",
+    description: "to be written-",
+  },
 ];
