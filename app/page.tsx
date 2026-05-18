@@ -210,6 +210,17 @@ export default function Home() {
           P.S. click here once
         </Link>
 
+        <Link
+          href="/whatsapp"
+          className="mt-8 inline-flex items-center justify-center rounded-full border border-[#8a3858] px-6 py-3 text-sm font-semibold text-[#3e1c2a] transition hover:bg-[#8a3858] hover:text-white"
+          style={{
+            background: "rgba(250, 235, 238, 0.9)",
+            boxShadow: "0 18px 40px rgba(142, 43, 80, 0.12)",
+          }}
+        >
+          View our WhatsApp chat
+        </Link>
+
         <span className="thin-rule" style={{ marginTop: "30px" }} />
       </section>
     </main>
