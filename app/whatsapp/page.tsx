@@ -26,6 +26,7 @@ export default function WhatsAppPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIndex, setSearchIndex] = useState(0);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
+  const searchResultRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 
   useEffect(() => {
     async function loadMessages() {
@@ -52,6 +53,35 @@ export default function WhatsAppPage() {
   useEffect(() => {
     setSearchIndex(0);
   }, [searchQuery]);
+
+  // Calculate derived variables
+  const grouped = groupByDate(messages);
+  const senders = Array.from(
+    new Set(messages.filter((m) => !m.isSystemMessage).map((m) => m.sender)),
+  );
+
+  const filteredMessages = searchQuery.trim()
+    ? messages.filter(
+        (m) =>
+          m.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          m.sender.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    : messages;
+
+  const currentSearchResultId =
+    searchQuery && filteredMessages.length > 0
+      ? filteredMessages[searchIndex]?.id
+      : -1;
+
+  useEffect(() => {
+    if (searchQuery && filteredMessages.length > 0) {
+      const searchResultId = filteredMessages[searchIndex]?.id;
+      const element = searchResultRefs.current.get(searchResultId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }, [searchIndex, searchQuery, filteredMessages]);
 
   useEffect(() => {
     if (messages.length === 0) return;
@@ -164,24 +194,6 @@ export default function WhatsAppPage() {
       </div>
     );
   }
-
-  const grouped = groupByDate(messages);
-  const senders = Array.from(
-    new Set(messages.filter((m) => !m.isSystemMessage).map((m) => m.sender)),
-  );
-
-  const filteredMessages = searchQuery.trim()
-    ? messages.filter(
-        (m) =>
-          m.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          m.sender.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
-    : messages;
-
-  const currentSearchResultId =
-    filteredMessages.length > 0 ? filteredMessages[searchIndex]?.id : -1;
-
-  const groupedFiltered = groupByDate(filteredMessages);
 
   const handleNextResult = () => {
     if (filteredMessages.length > 0) {
@@ -339,86 +351,83 @@ export default function WhatsAppPage() {
         ref={messagesContainerRef}
         className={`flex-1 overflow-y-auto px-4 py-4 space-y-2 ${isDark ? "" : "bg-gray-50"}`}
       >
-        {groupedFiltered.size === 0 && searchQuery ? (
-          <div
-            className={`flex items-center justify-center h-full ${secondaryTextColor}`}
-          >
-            <p>No messages found</p>
-          </div>
-        ) : (
-          Array.from(groupedFiltered.entries()).map(([date, msgs]) => (
-            <div key={date}>
-              {/* Date separator */}
-              <div className="flex justify-center my-4">
-                <div
-                  className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-full`}
-                >
-                  {formatDate(date)}
-                </div>
+        {Array.from(grouped.entries()).map(([date, msgs]) => (
+          <div key={date}>
+            {/* Date separator */}
+            <div className="flex justify-center my-4">
+              <div
+                className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-full`}
+              >
+                {formatDate(date)}
               </div>
+            </div>
 
-              {/* Messages */}
-              {msgs.map((msg) => {
-                if (msg.isSystemMessage) {
-                  return (
-                    <div key={msg.id} className="flex justify-center my-2">
-                      <div
-                        className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-lg max-w-sm text-center`}
-                      >
-                        {msg.content}
-                      </div>
-                    </div>
-                  );
-                }
-
-                const isSent = msg.sender === currentUser;
-                const isCurrentSearchResult =
-                  searchQuery && msg.id === currentSearchResultId;
-
+            {/* Messages */}
+            {msgs.map((msg) => {
+              if (msg.isSystemMessage) {
                 return (
-                  <div
-                    key={msg.id}
-                    className={`flex mb-2 ${
-                      isSent ? "justify-end" : "justify-start"
-                    }`}
-                  >
+                  <div key={msg.id} className="flex justify-center my-2">
                     <div
-                      className={`max-w-xs px-3 py-2 rounded-lg transition-all ${
-                        isCurrentSearchResult
-                          ? "ring-2 ring-yellow-400 shadow-lg"
-                          : ""
-                      } ${
-                        isSent
-                          ? `${messageBgRight} text-white rounded-br-none`
-                          : `${messageBgLeft} ${isDark ? "text-white" : "text-gray-900"} rounded-bl-none`
-                      }`}
+                      className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-lg max-w-sm text-center`}
                     >
-                      <p className="text-sm wrap-break-word whitespace-pre-wrap">
-                        {msg.content}
-                      </p>
-                      <div className="flex justify-end items-center gap-1 mt-1">
-                        <span
-                          className={`text-[10px] ${isDark ? "text-[#8696a0]" : "text-gray-600"}`}
-                        >
-                          {msg.time}
-                        </span>
-                        {isSent && (
-                          <svg
-                            className={`w-3 h-3 ${isDark ? "text-[#53bdeb]" : "text-cyan-400"}`}
-                            fill="currentColor"
-                            viewBox="0 0 16 15"
-                          >
-                            <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" />
-                          </svg>
-                        )}
-                      </div>
+                      {msg.content}
                     </div>
                   </div>
                 );
-              })}
-            </div>
-          ))
-        )}
+              }
+
+              const isSent = msg.sender === currentUser;
+              const isCurrentSearchResult =
+                searchQuery && msg.id === currentSearchResultId;
+
+              return (
+                <div
+                  key={msg.id}
+                  className={`flex mb-2 ${
+                    isSent ? "justify-end" : "justify-start"
+                  }`}
+                  ref={(el) => {
+                    if (el && isCurrentSearchResult) {
+                      searchResultRefs.current.set(msg.id, el);
+                    }
+                  }}
+                >
+                  <div
+                    className={`max-w-xs px-3 py-2 rounded-lg transition-all ${
+                      isCurrentSearchResult
+                        ? "ring-2 ring-yellow-400 shadow-lg"
+                        : ""
+                    } ${
+                      isSent
+                        ? `${messageBgRight} text-white rounded-br-none`
+                        : `${messageBgLeft} ${isDark ? "text-white" : "text-gray-900"} rounded-bl-none`
+                    }`}
+                  >
+                    <p className="text-sm wrap-break-word whitespace-pre-wrap">
+                      {msg.content}
+                    </p>
+                    <div className="flex justify-end items-center gap-1 mt-1">
+                      <span
+                        className={`text-[10px] ${isDark ? "text-[#8696a0]" : "text-gray-600"}`}
+                      >
+                        {msg.time}
+                      </span>
+                      {isSent && (
+                        <svg
+                          className={`w-3 h-3 ${isDark ? "text-[#53bdeb]" : "text-cyan-400"}`}
+                          fill="currentColor"
+                          viewBox="0 0 16 15"
+                        >
+                          <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" />
+                        </svg>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ))}
       </div>
 
       {/* Footer */}
