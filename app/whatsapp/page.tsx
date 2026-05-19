@@ -171,6 +171,33 @@ export default function WhatsAppPage() {
     return grouped;
   }
 
+  function renderMessageText(text: string) {
+    const urlPattern = /\b(?:https?:\/\/|www\.)[^\s<>]+/i;
+    const parts = text.split(/(\b(?:https?:\/\/|www\.)[^\s<>]+)/gi);
+
+    return parts.map((part, index) => {
+      if (!part) return null;
+      const isUrl = urlPattern.test(part);
+
+      if (isUrl) {
+        const href = part.startsWith("www.") ? `https://${part}` : part;
+        return (
+          <a
+            key={index}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-cyan-300 underline decoration-cyan-300 hover:text-cyan-200"
+          >
+            {part}
+          </a>
+        );
+      }
+
+      return <span key={index}>{part}</span>;
+    });
+  }
+
   if (loading) {
     return (
       <div className="h-screen bg-[#0b141a] flex items-center justify-center">
@@ -221,11 +248,17 @@ export default function WhatsAppPage() {
 
   return (
     <div
-      className={`min-h-screen ${bgColor} flex flex-col w-full mx-auto max-w-full md:max-w-2xl ${roboto.className}`}
+      className={`h-screen relative ${bgColor} flex flex-col ${roboto.className}`}
+      style={{
+        backgroundImage: `url(${isDark ? "/whatsappbg-dark.png" : "/whatsappbg-light.jpg"})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
       {/* Header */}
       <header
-        className={`${headerBgColor} px-3 sm:px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-2 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
+        className={`${headerBgColor} px-4 py-3 flex items-center gap-3 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"} absolute top-0 left-0 right-0 z-20`}
       >
         <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm sm:text-base">
           {otherUser[0]?.toUpperCase() || "?"}
@@ -281,7 +314,7 @@ export default function WhatsAppPage() {
 
       {/* Search Bar */}
       <div
-        className={`${headerBgColor} px-4 py-2 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
+        className={`mt-16 ${headerBgColor} px-4 py-2 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
       >
         <div
           className={`flex flex-wrap items-center gap-2 px-3 py-2 rounded-full ${isDark ? "bg-[#2a3942]" : "bg-gray-300"}`}
@@ -408,7 +441,7 @@ export default function WhatsAppPage() {
                     }`}
                   >
                     <p className="text-sm wrap-break-word whitespace-pre-wrap">
-                      {msg.content}
+                      {renderMessageText(msg.content)}
                     </p>
                     <div className="flex justify-end items-center gap-1 mt-1">
                       <span
