@@ -220,16 +220,20 @@ export default function WhatsAppPage() {
   const secondaryTextColor = isDark ? "text-[#8696a0]" : "text-gray-600";
 
   return (
-    <div className={`h-screen ${bgColor} flex flex-col ${roboto.className}`}>
+    <div
+      className={`min-h-screen ${bgColor} flex flex-col w-full mx-auto max-w-full md:max-w-2xl ${roboto.className}`}
+    >
       {/* Header */}
       <header
-        className={`${headerBgColor} px-4 py-3 flex items-center gap-3 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
+        className={`${headerBgColor} px-3 sm:px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-2 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
       >
-        <div className="w-10 h-10 rounded-full bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold">
+        <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm sm:text-base">
           {otherUser[0]?.toUpperCase() || "?"}
         </div>
-        <div className="flex-1">
-          <h1 className={`${textColor} font-medium text-sm`}>{otherUser}</h1>
+        <div className="flex-1 min-w-0">
+          <h1 className={`${textColor} font-medium text-sm truncate`}>
+            {otherUser}
+          </h1>
           <p className={`${secondaryTextColor} text-xs`}>Active now</p>
         </div>
         {/* Toggle Buttons */}
@@ -280,7 +284,7 @@ export default function WhatsAppPage() {
         className={`${headerBgColor} px-4 py-2 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
       >
         <div
-          className={`flex items-center gap-2 px-3 py-2 rounded-full ${isDark ? "bg-[#2a3942]" : "bg-gray-300"}`}
+          className={`flex flex-wrap items-center gap-2 px-3 py-2 rounded-full ${isDark ? "bg-[#2a3942]" : "bg-gray-300"}`}
         >
           <svg
             className={`w-5 h-5 ${secondaryTextColor}`}
@@ -349,7 +353,7 @@ export default function WhatsAppPage() {
       {/* Messages */}
       <div
         ref={messagesContainerRef}
-        className={`flex-1 overflow-y-auto px-4 py-4 space-y-2 ${isDark ? "" : "bg-gray-50"}`}
+        className={`flex-1 min-h-0 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 space-y-2 ${isDark ? "" : "bg-gray-50"}`}
       >
         {Array.from(grouped.entries()).map(([date, msgs]) => (
           <div key={date}>
@@ -368,7 +372,7 @@ export default function WhatsAppPage() {
                 return (
                   <div key={msg.id} className="flex justify-center my-2">
                     <div
-                      className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-lg max-w-sm text-center`}
+                      className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-lg max-w-[85%] sm:max-w-sm text-center`}
                     >
                       {msg.content}
                     </div>
@@ -393,7 +397,7 @@ export default function WhatsAppPage() {
                   }}
                 >
                   <div
-                    className={`max-w-xs px-3 py-2 rounded-lg transition-all ${
+                    className={`max-w-[85%] sm:max-w-xs px-3 py-2 rounded-lg transition-all ${
                       isCurrentSearchResult
                         ? "ring-2 ring-yellow-400 shadow-lg"
                         : ""
@@ -432,7 +436,7 @@ export default function WhatsAppPage() {
 
       {/* Footer */}
       <footer
-        className={`${headerBgColor} px-4 py-3 flex items-center gap-2 border-t ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
+        className={`${headerBgColor} px-3 sm:px-4 py-3 flex items-center gap-2 border-t ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
       >
         <button
           className={`${secondaryTextColor} transition ${isDark ? "hover:text-white" : "hover:text-gray-900"}`}
