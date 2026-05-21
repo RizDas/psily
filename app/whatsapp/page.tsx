@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
@@ -25,6 +26,7 @@ export default function WhatsAppPage() {
   const [currentUser, setCurrentUser] = useState("Manushree");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIndex, setSearchIndex] = useState(0);
+  const [isAtBottom, setIsAtBottom] = useState(true);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const searchResultRefs = useRef<Map<number, HTMLDivElement>>(new Map());
 
@@ -88,7 +90,23 @@ export default function WhatsAppPage() {
     const container = messagesContainerRef.current;
     if (container) {
       container.scrollTop = container.scrollHeight;
+      setIsAtBottom(true);
     }
+  }, [messages]);
+
+  useEffect(() => {
+    const container = messagesContainerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const isBottom =
+        container.scrollHeight - container.scrollTop - container.clientHeight <
+        50;
+      setIsAtBottom(isBottom);
+    };
+
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
   }, [messages]);
 
   function parseWhatsAppChat(text: string): Message[] {
@@ -466,6 +484,26 @@ export default function WhatsAppPage() {
           </div>
         ))}
       </div>
+
+      {/* Scroll to Bottom Button */}
+      {!isAtBottom && (
+        <button
+          onClick={() => {
+            const container = messagesContainerRef.current;
+            if (container) {
+              container.scrollTo({
+                top: container.scrollHeight,
+                behavior: "smooth",
+              });
+            }
+          }}
+          className="fixed bottom-20 right-3 sm:bottom-24 sm:right-6 z-50 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#25d366] hover:bg-[#1fa755] text-white flex items-center justify-center shadow-lg transition-all active:scale-95"
+          title="Scroll to bottom"
+          aria-label="Scroll to bottom"
+        >
+          <KeyboardArrowDownIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+        </button>
+      )}
 
       {/* Footer */}
       <footer

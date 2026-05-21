@@ -133,4 +133,16 @@ export const timeline = [
     title: "end of bday week",
     description: "to be written-",
   },
+  {
+    id: 21,
+    date: "19/5/2026",
+    title: "fit check 😍 and crazy crossover",
+    description: "to be written-",
+  },
+  {
+    id: 22,
+    date: "21/5/2026",
+    title: "FIRST KISS❣️",
+    description: "to be written-",
+  },
 ];
