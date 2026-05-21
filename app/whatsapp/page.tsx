@@ -27,8 +27,10 @@ export default function WhatsAppPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIndex, setSearchIndex] = useState(0);
   const [isAtBottom, setIsAtBottom] = useState(true);
+  const [stickyDate, setStickyDate] = useState("");
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const searchResultRefs = useRef<Map<number, HTMLDivElement>>(new Map());
+  const dateHeaderRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   useEffect(() => {
     async function loadMessages() {
@@ -92,6 +94,7 @@ export default function WhatsAppPage() {
       container.scrollTop = container.scrollHeight;
       setIsAtBottom(true);
     }
+    setStickyDate(messages[0]?.date ?? "");
   }, [messages]);
 
   useEffect(() => {
@@ -103,8 +106,23 @@ export default function WhatsAppPage() {
         container.scrollHeight - container.scrollTop - container.clientHeight <
         50;
       setIsAtBottom(isBottom);
+
+      const containerRect = container.getBoundingClientRect();
+      let currentDate = "";
+      dateHeaderRefs.current.forEach((el, date) => {
+        const top = el.getBoundingClientRect().top - containerRect.top;
+        if (top <= 10) {
+          currentDate = date;
+        }
+      });
+
+      if (!currentDate && messages.length > 0) {
+        currentDate = messages[0].date;
+      }
+      setStickyDate(currentDate);
     };
 
+    handleScroll();
     container.addEventListener("scroll", handleScroll);
     return () => container.removeEventListener("scroll", handleScroll);
   }, [messages]);
@@ -406,11 +424,27 @@ export default function WhatsAppPage() {
         ref={messagesContainerRef}
         className={`flex-1 min-h-0 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 space-y-2 ${isDark ? "" : "bg-gray-50"}`}
       >
+        {stickyDate && (
+          <div className="sticky top-0 z-20 flex justify-center pb-2 bg-transparent">
+            <div
+              className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-full shadow-sm`}
+            >
+              {formatDate(stickyDate)}
+            </div>
+          </div>
+        )}
         {Array.from(grouped.entries()).map(([date, msgs]) => (
           <div key={date}>
             {/* Date separator */}
             <div className="flex justify-center my-4">
               <div
+                ref={(el) => {
+                  if (el) {
+                    dateHeaderRefs.current.set(date, el);
+                  } else {
+                    dateHeaderRefs.current.delete(date);
+                  }
+                }}
                 className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-full`}
               >
                 {formatDate(date)}
