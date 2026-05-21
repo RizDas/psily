@@ -89,37 +89,42 @@ export const timeline = [
     date: "21/4/2026",
     title: "Hand Drawing",
     description:
-      "she wrote on my left palm, 'The Love of my Life: MS' !! I wanted to show it to everyone, but controlled the urge with my sheer willpower. Also, I GOT HER SCRUNCHIE (in exchange for hairtie)",
+      "she wrote on my left palm, 'The Love of my Life: MS' !! I wanted to show it to everyone, but controlled the urge with my sheer willpower. Also, I GOT HER SCRUNCHIE (in exchange for hairtie) (i still had to exchange it back tho)",
   },
   {
     id: 14,
     date: "24/4/2026",
     title: "...",
-    description: "to be written-",
+    description:
+      "ONE MONTH Pt-1 !!! she gave me a hand written letter... and a box, fullof 30 HANDMADE STARS, each containing a note for a single day, so that i can open one each day. It was so amazing 🥹 WOW. I gave her this website that i made just for her. I was reading the letter with such pride and happiness, while she was feeding me in the break 🥰",
   },
   {
     id: 15,
     date: "25/4/2026",
     title: "...",
-    description: "to be written-",
+    description:
+      "ONE MONTH Pt-2 !!! She thought i didnt even write her a letter. So I surprised her with a very very long letter, longer than her. She absolutely loved it ! Almost nobody came to school so we spent much more time with each other peacefully. In the break, while she was reading the letter, I was feeding her, and she looked so cute and happy 💗",
   },
   {
     id: 16,
     date: "28/4/2026",
     title: "near home meet and warning",
-    description: "to be written-",
+    description:
+      "i went near her home, and was waiting for her to come. Suddenly someone came from behind, and warned me and asked me to leave. it was CRAZY ! when she came out, she looked so beautiful, and she was very tensed, but we still had a shirt and lovely time together.",
   },
   {
     id: 17,
     date: "2/5/2026",
     title: "tiffin and gitanjali",
-    description: "to be written-",
+    description:
+      "she wanted to eat something that i made, so i made some sandwitched of my own. She liked my sandwitches 😁 and... it was the first time we went to gitanjali (just to inspect maybe, who knows)",
   },
   {
     id: 18,
     date: "6/5/2026",
     title: "auto and specs",
-    description: "to be written-",
+    description:
+      "so we were returning by auto... my hand placement was umm... and i was taking advantage of it 😁 (she loved it ik). she kept her glasses with me, which we forgot 😓... so i had her glasses for 2 days",
   },
   {
     id: 19,
