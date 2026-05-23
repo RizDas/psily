@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import SearchIcon from "@mui/icons-material/Search";
+import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
 import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
 import FolderCopyOutlinedIcon from "@mui/icons-material/FolderCopyOutlined";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
@@ -27,12 +29,14 @@ export default function WhatsAppPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const [currentUser, setCurrentUser] = useState("Manushree");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchIndex, setSearchIndex] = useState(0);
+  const [showSearchBar, setShowSearchBar] = useState(false);
   const [activeTab, setActiveTab] = useState<"chat" | "links">("chat");
   const [isAtBottom, setIsAtBottom] = useState(true);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
   const [stickyDate, setStickyDate] = useState("");
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
   const searchResultRefs = useRef<Map<number, HTMLDivElement>>(new Map());
@@ -64,18 +68,30 @@ export default function WhatsAppPage() {
     setSearchIndex(0);
   }, [searchQuery]);
 
+  useLayoutEffect(() => {
+    if (showSearchBar && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [showSearchBar]);
+
   // Calculate derived variables
   const grouped = groupByDate(messages);
   const senders = Array.from(
     new Set(messages.filter((m) => !m.isSystemMessage).map((m) => m.sender)),
   );
 
-  const filteredMessages = searchQuery.trim()
-    ? messages.filter(
-        (m) =>
-          m.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          m.sender.toLowerCase().includes(searchQuery.toLowerCase()),
-      )
+  const normalizedSearchQuery = searchQuery.trim().toLowerCase();
+
+  const filteredMessages = normalizedSearchQuery
+    ? messages.filter((m) => {
+        const formattedDate = formatDate(m.date).toLowerCase();
+        return (
+          m.content.toLowerCase().includes(normalizedSearchQuery) ||
+          m.sender.toLowerCase().includes(normalizedSearchQuery) ||
+          m.date.toLowerCase().includes(normalizedSearchQuery) ||
+          formattedDate.includes(normalizedSearchQuery)
+        );
+      })
     : messages;
 
   const currentSearchResultId =
@@ -93,13 +109,21 @@ export default function WhatsAppPage() {
 
   useEffect(() => {
     if (searchQuery && filteredMessages.length > 0) {
-      const searchResultId = filteredMessages[searchIndex]?.id;
-      const element = searchResultRefs.current.get(searchResultId);
+      const searchResultMsg = filteredMessages[searchIndex];
+      const isDateMatch = searchResultMsg
+        ? searchResultMsg.date.toLowerCase().includes(normalizedSearchQuery) ||
+          formatDate(searchResultMsg.date)
+            .toLowerCase()
+            .includes(normalizedSearchQuery)
+        : false;
+      const element = isDateMatch
+        ? dateHeaderRefs.current.get(searchResultMsg.date)
+        : searchResultRefs.current.get(searchResultMsg.id);
       if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "center" });
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
-  }, [searchIndex, searchQuery, filteredMessages]);
+  }, [searchIndex, searchQuery, filteredMessages, normalizedSearchQuery]);
 
   useEffect(() => {
     if (messages.length === 0) return;
@@ -237,7 +261,7 @@ export default function WhatsAppPage() {
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-cyan-300 underline decoration-cyan-300 hover:text-cyan-200"
+            className="text-[#2f8b5a] underline decoration-[#2f8b5a] hover:text-[#196b45]"
           >
             {part}
           </a>
@@ -246,6 +270,29 @@ export default function WhatsAppPage() {
 
       return <span key={index}>{part}</span>;
     });
+  }
+
+  function parseMessageStatus(text: string) {
+    const editedPattern =
+      /\s*(?:<\s*this message was edited\s*>|\(?edited\)?)\s*$/i;
+    const deletedPattern =
+      /\s*(?:<\s*this message was deleted\s*>|this message was deleted)\s*$/i;
+
+    let displayText = text;
+    let edited = false;
+    let deleted = false;
+
+    if (editedPattern.test(displayText)) {
+      edited = true;
+      displayText = displayText.replace(editedPattern, "").trim();
+    }
+
+    if (deletedPattern.test(displayText)) {
+      deleted = true;
+      displayText = displayText.replace(deletedPattern, "").trim();
+    }
+
+    return { displayText, edited, deleted };
   }
 
   if (loading) {
@@ -289,18 +336,21 @@ export default function WhatsAppPage() {
 
   const otherUser = senders.find((s) => s !== currentUser) || "Chat";
 
-  const bgColor = isDark ? "bg-[#0b141a]" : "bg-white";
-  const headerBgColor = isDark ? "bg-[#202c33]" : "bg-gray-100";
-  const messageBgLeft = isDark ? "bg-[#202c33]" : "bg-gray-300";
-  const messageBgRight = isDark ? "bg-[#005c4b]" : "bg-green-600";
-  const textColor = isDark ? "text-white" : "text-gray-900";
-  const secondaryTextColor = isDark ? "text-[#8696a0]" : "text-gray-600";
+  const bgColor = isDark ? "bg-[#0b141a]" : "bg-transparent";
+  const headerBgColor = isDark ? "bg-[#111b21]/95" : "bg-white/95";
+  const headerBorderColor = isDark ? "border-[#111b21]" : "border-[#d1d5db]";
+  const messageBgLeft = isDark ? "bg-[#2f343b]" : "bg-white";
+  const messageTextLeft = isDark ? "text-[#d1d5db]" : "text-[#111827]";
+  const messageBgRight = isDark ? "bg-[#054640]" : "bg-[#a7ff9e]";
+  const messageTextRight = isDark ? "text-white" : "text-[#111827]";
+  const textColor = isDark ? "text-white" : "text-[#111827]";
+  const secondaryTextColor = isDark ? "text-[#bdc3c8]" : "text-[#657786]";
 
   return (
     <div
-      className={`h-screen relative ${bgColor} flex flex-col ${roboto.className}`}
+      className={`h-screen relative ${bgColor} flex flex-col overflow-x-hidden ${roboto.className}`}
       style={{
-        backgroundImage: `url(${isDark ? "/whatsappbg-dark.png" : "/whatsappbg-light.jpg"})`,
+        backgroundImage: `url(${isDark ? "/whatsapp-dark.png" : "/whatsapp-light.png"})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -308,57 +358,68 @@ export default function WhatsAppPage() {
     >
       {/* Header */}
       <header
-        className={`${headerBgColor} px-4 py-3 flex items-center gap-3 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"} absolute top-0 left-0 right-0 z-20`}
+        className={`${headerBgColor} px-4 py-3 flex items-center gap-3 border-b ${headerBorderColor} absolute top-0 left-0 right-0 z-30`}
       >
-        <div className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm sm:text-base">
-          {otherUser[0]?.toUpperCase() || "?"}
+        <div className="w-11 h-11 sm:w-10 sm:h-10 relative rounded-full overflow-hidden bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm sm:text-base">
+          {otherUser === "Rishabh Das" ? (
+            <Image
+              src="/rishabhdas.jpeg"
+              alt="Rishabh Das"
+              fill
+              className="object-cover"
+            />
+          ) : otherUser === "Manushree" ? (
+            <Image
+              src="/manushree.png"
+              alt="Manushree"
+              fill
+              className="object-cover"
+            />
+          ) : (
+            otherUser[0]?.toUpperCase() || "?"
+          )}
         </div>
         <div className="flex-1 min-w-0">
           <h1 className={`${textColor} font-medium text-sm truncate`}>
             {otherUser}
           </h1>
-          <p className={`${secondaryTextColor} text-xs`}>Active now</p>
+          <p className={`${secondaryTextColor} text-xs`}>
+            last seen today at 20:24
+          </p>
         </div>
-        {/* Toggle Buttons */}
         <div className="flex items-center gap-2">
           <button
             onClick={() =>
               setActiveTab(activeTab === "links" ? "chat" : "links")
             }
-            className={`flex items-center gap-1 p-2 rounded-lg transition ${
+            className={`p-2 rounded-full transition ${
               activeTab === "links"
-                ? isDark
-                  ? "bg-slate-700 text-slate-100"
-                  : "bg-slate-100 text-slate-900"
+                ? "bg-[#25d366] text-white"
                 : isDark
-                  ? "bg-[#2a3942] text-cyan-400 hover:bg-[#3a4952]"
-                  : "bg-gray-200 text-cyan-600 hover:bg-gray-300"
+                  ? "bg-[#1f2a31] text-white/90 hover:bg-[#25303a]"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
-            title={activeTab === "links" ? "Back" : "Links"}
+            title={activeTab === "links" ? "Back to chat" : "Links"}
           >
-            {activeTab === "links" ? (
-              <>
-                <ArrowRightAltIcon className="w-5 h-5" />
-                <span className="hidden sm:inline text-[11px] font-medium">
-                  Back
-                </span>
-              </>
-            ) : (
-              <>
-                <FolderCopyOutlinedIcon className="w-5 h-5" />
-                <span className="hidden sm:inline text-[11px] font-medium">
-                  Links
-                </span>
-              </>
-            )}
+            <FolderCopyOutlinedIcon className="w-5 h-5" />
           </button>
-          {/* Theme Toggle */}
+          <button
+            onClick={() => setShowSearchBar(true)}
+            className={`p-2 rounded-full transition ${
+              isDark
+                ? "bg-[#1f2a31] text-white/90 hover:bg-[#25303a]"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            }`}
+            title="Search messages"
+          >
+            <SearchIcon className="w-5 h-5" />
+          </button>
           <button
             onClick={() => setIsDark(!isDark)}
-            className={`p-2 rounded-lg transition ${
+            className={`p-2 rounded-full transition ${
               isDark
-                ? "bg-[#2a3942] text-yellow-400 hover:bg-[#3a4952]"
-                : "bg-gray-200 text-gray-900 hover:bg-gray-300"
+                ? "bg-[#1f2a31] text-yellow-400 hover:bg-[#25303a]"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
             title="Toggle theme"
           >
@@ -368,17 +429,16 @@ export default function WhatsAppPage() {
               <DarkModeIcon className="w-5 h-5" />
             )}
           </button>
-          {/* Perspective Toggle */}
           <button
             onClick={() =>
               setCurrentUser(
                 currentUser === "Rishabh Das" ? "Manushree" : "Rishabh Das",
               )
             }
-            className={`p-2 rounded-lg transition ${
+            className={`p-2 rounded-full transition ${
               isDark
-                ? "bg-[#2a3942] text-cyan-400 hover:bg-[#3a4952]"
-                : "bg-gray-200 text-cyan-600 hover:bg-gray-300"
+                ? "bg-[#1f2a31] text-white/90 hover:bg-[#25303a]"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
             title="Switch perspective"
           >
@@ -388,35 +448,24 @@ export default function WhatsAppPage() {
       </header>
 
       {/* Search Bar */}
-      {activeTab === "chat" && (
+      {activeTab === "chat" && showSearchBar && (
         <div
-          className={`mt-16 ${headerBgColor} px-4 py-2 border-b ${isDark ? "border-[#202c33]" : "border-gray-300"}`}
+          className={`mt-16 ${headerBgColor} px-4 pb-3 border-b ${headerBorderColor} backdrop-blur-sm`}
         >
           <div
-            className={`flex flex-wrap items-center gap-2 px-3 py-2 rounded-full ${isDark ? "bg-[#2a3942]" : "bg-gray-300"}`}
+            className={`flex items-center gap-2 px-3 py-2 rounded-full border ${isDark ? "border-[#1f2a31] bg-[#111b21]" : "border-[#d1d5db] bg-white"}`}
           >
-            <svg
-              className={`w-5 h-5 ${secondaryTextColor}`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+            <SearchIcon className={`w-5 h-5 ${secondaryTextColor}`} />
             <input
+              ref={searchInputRef}
               type="text"
               placeholder="Search messages..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className={`flex-1 outline-none text-sm ${isDark ? "bg-[#2a3942] text-white placeholder-[#8696a0]" : "bg-gray-300 text-gray-900 placeholder-gray-600"}`}
+              className={`flex-1 text-sm outline-none ${isDark ? "bg-transparent text-white placeholder-[#8899a6]" : "bg-transparent text-gray-900 placeholder-gray-500"}`}
             />
             {searchQuery && filteredMessages.length > 0 && (
-              <>
+              <div className="flex items-center gap-1">
                 <span className={`text-xs ${secondaryTextColor}`}>
                   {searchIndex + 1} / {filteredMessages.length}
                 </span>
@@ -446,14 +495,24 @@ export default function WhatsAppPage() {
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
                   </svg>
                 </button>
-              </>
+              </div>
             )}
-            {searchQuery && (
+            {searchQuery ? (
               <button
                 onClick={() => setSearchQuery("")}
                 className={`text-sm font-medium ${isDark ? "text-cyan-400 hover:text-cyan-300" : "text-cyan-600 hover:text-cyan-700"}`}
               >
                 Clear
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setShowSearchBar(false);
+                  setSearchQuery("");
+                }}
+                className={`text-sm font-medium ${isDark ? "text-[#bdc3c8] hover:text-white" : "text-gray-600 hover:text-gray-900"}`}
+              >
+                Cancel
               </button>
             )}
           </div>
@@ -463,7 +522,7 @@ export default function WhatsAppPage() {
       {activeTab === "chat" ? (
         <div
           ref={messagesContainerRef}
-          className={`flex-1 min-h-0 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 space-y-2 ${isDark ? "" : "bg-gray-50"}`}
+          className={`flex-1 min-h-0 min-w-0 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 pt-20 space-y-2 ${isDark ? "" : "bg-transparent"}`}
         >
           {stickyDate && (
             <div className="sticky top-0 z-20 flex justify-center pb-2 bg-transparent">
@@ -498,7 +557,7 @@ export default function WhatsAppPage() {
                   return (
                     <div key={msg.id} className="flex justify-center my-2">
                       <div
-                        className={`${isDark ? "bg-[#202c33] text-[#8696a0]" : "bg-gray-300 text-gray-700"} text-xs px-3 py-1 rounded-lg max-w-[85%] sm:max-w-sm text-center`}
+                        className={`${isDark ? "bg-[#1c2428] text-[#b0b8c0]" : "bg-[#f2f3f5] text-[#6b7280]"} text-xs px-3 py-1 rounded-lg max-w-[85%] sm:max-w-sm text-center`}
                       >
                         {msg.content}
                       </div>
@@ -509,6 +568,16 @@ export default function WhatsAppPage() {
                 const isSent = msg.sender === currentUser;
                 const isCurrentSearchResult =
                   searchQuery && msg.id === currentSearchResultId;
+                const {
+                  displayText: rawDisplayText,
+                  edited,
+                  deleted,
+                } = parseMessageStatus(msg.content);
+                const displayText = deleted
+                  ? isSent
+                    ? "You deleted this message"
+                    : "This message was deleted"
+                  : rawDisplayText;
 
                 return (
                   <div
@@ -523,34 +592,43 @@ export default function WhatsAppPage() {
                     }}
                   >
                     <div
-                      className={`max-w-[85%] sm:max-w-xs px-3 py-2 rounded-lg transition-all ${
+                      className={`max-w-[85%] sm:max-w-xs px-3 py-2 rounded-xl transition-all ${
                         isCurrentSearchResult
                           ? "ring-2 ring-yellow-400 shadow-lg"
                           : ""
                       } ${
                         isSent
-                          ? `${messageBgRight} text-white rounded-br-none`
-                          : `${messageBgLeft} ${isDark ? "text-white" : "text-gray-900"} rounded-bl-none`
+                          ? `${messageBgRight} ${messageTextRight} rounded-br-none`
+                          : `${messageBgLeft} ${messageTextLeft} rounded-bl-none`
                       }`}
                     >
-                      <p className="text-sm wrap-break-word whitespace-pre-wrap">
-                        {renderMessageText(msg.content)}
-                      </p>
-                      <div className="flex justify-end items-center gap-1 mt-1">
+                      <div className="flex items-center gap-2 text-sm wrap-break-word whitespace-pre-wrap leading-5">
+                        {deleted && (
+                          <DoNotDisturbIcon
+                            className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
+                          />
+                        )}
                         <span
-                          className={`text-[10px] ${isDark ? "text-[#8696a0]" : "text-gray-600"}`}
+                          className={`${deleted ? (isDark ? "text-[#d1d5d9]" : "text-[#374151]") : ""}`}
+                        >
+                          {deleted
+                            ? displayText
+                            : renderMessageText(displayText)}
+                        </span>
+                      </div>
+                      <div className="flex justify-end items-center gap-1 mt-0.5">
+                        {edited && (
+                          <span
+                            className={`text-[10px] ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
+                          >
+                            Edited
+                          </span>
+                        )}
+                        <span
+                          className={`text-[10px] ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
                         >
                           {msg.time}
                         </span>
-                        {isSent && (
-                          <svg
-                            className={`w-3 h-3 ${isDark ? "text-[#53bdeb]" : "text-cyan-400"}`}
-                            fill="currentColor"
-                            viewBox="0 0 16 15"
-                          >
-                            <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z" />
-                          </svg>
-                        )}
                       </div>
                     </div>
                   </div>
@@ -562,7 +640,7 @@ export default function WhatsAppPage() {
       ) : (
         <div
           ref={messagesContainerRef}
-          className={`flex-1 min-h-0 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 ${isDark ? "" : "bg-gray-50"}`}
+          className={`flex-1 min-h-0 min-w-0 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 ${isDark ? "" : "bg-transparent"}`}
         >
           <div className="mb-4">
             <div
