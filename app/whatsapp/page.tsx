@@ -617,16 +617,15 @@ export default function WhatsAppPage() {
                       }`}
                     >
                       <div className="flex items-center gap-2 text-sm break-all whitespace-pre-wrap leading-5 w-full overflow-hidden">
-                        {deleted &&
-                          (mediaOmitted ? (
-                            <HideImageIcon
-                              className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
-                            />
-                          ) : (
-                            <DoNotDisturbIcon
-                              className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
-                            />
-                          ))}
+                        {mediaOmitted ? (
+                          <HideImageIcon
+                            className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
+                          />
+                        ) : deleted ? (
+                          <DoNotDisturbIcon
+                            className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
+                          />
+                        ) : null}
                         <span
                           className={`${deleted ? (isDark ? "text-[#d1d5d9]" : "text-[#374151]") : ""} break-all`}
                         >
