@@ -7,6 +7,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import SearchIcon from "@mui/icons-material/Search";
 import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
+import HideImageIcon from "@mui/icons-material/HideImage";
 import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
 import FolderCopyOutlinedIcon from "@mui/icons-material/FolderCopyOutlined";
 import { Roboto } from "next/font/google";
@@ -277,10 +278,12 @@ export default function WhatsAppPage() {
       /\s*(?:<\s*this message was edited\s*>|\(?edited\)?)\s*$/i;
     const deletedPattern =
       /\s*(?:<\s*this message was deleted\s*>|this message was deleted)\s*$/i;
+    const mediaOmittedPattern = /\s*<\s*media omitted\s*>\s*$/i;
 
     let displayText = text;
     let edited = false;
     let deleted = false;
+    let mediaOmitted = false;
 
     if (editedPattern.test(displayText)) {
       edited = true;
@@ -292,7 +295,12 @@ export default function WhatsAppPage() {
       displayText = displayText.replace(deletedPattern, "").trim();
     }
 
-    return { displayText, edited, deleted };
+    if (mediaOmittedPattern.test(displayText)) {
+      mediaOmitted = true;
+      displayText = "Media omitted";
+    }
+
+    return { displayText, edited, deleted, mediaOmitted };
   }
 
   if (loading) {
@@ -341,7 +349,7 @@ export default function WhatsAppPage() {
   const headerBorderColor = isDark ? "border-[#111b21]" : "border-[#d1d5db]";
   const messageBgLeft = isDark ? "bg-[#2f343b]" : "bg-white";
   const messageTextLeft = isDark ? "text-[#d1d5db]" : "text-[#111827]";
-  const messageBgRight = isDark ? "bg-[#054640]" : "bg-[#a9feb3]";
+  const messageBgRight = isDark ? "bg-[#144D37]" : "bg-[#a3e7ab]";
   const messageTextRight = isDark ? "text-white" : "text-[#111827]";
   const textColor = isDark ? "text-white" : "text-[#111827]";
   const secondaryTextColor = isDark ? "text-[#bdc3c8]" : "text-[#657786]";
@@ -575,11 +583,14 @@ export default function WhatsAppPage() {
                   displayText: rawDisplayText,
                   edited,
                   deleted,
+                  mediaOmitted,
                 } = parseMessageStatus(msg.content);
                 const displayText = deleted
-                  ? isSent
-                    ? "You deleted this message"
-                    : "This message was deleted"
+                  ? mediaOmitted
+                    ? "Media omitted"
+                    : isSent
+                      ? "You deleted this message"
+                      : "This message was deleted"
                   : rawDisplayText;
 
                 return (
@@ -606,11 +617,16 @@ export default function WhatsAppPage() {
                       }`}
                     >
                       <div className="flex items-center gap-2 text-sm break-all whitespace-pre-wrap leading-5 w-full overflow-hidden">
-                        {deleted && (
-                          <DoNotDisturbIcon
-                            className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
-                          />
-                        )}
+                        {deleted &&
+                          (mediaOmitted ? (
+                            <HideImageIcon
+                              className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
+                            />
+                          ) : (
+                            <DoNotDisturbIcon
+                              className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
+                            />
+                          ))}
                         <span
                           className={`${deleted ? (isDark ? "text-[#d1d5d9]" : "text-[#374151]") : ""} break-all`}
                         >
