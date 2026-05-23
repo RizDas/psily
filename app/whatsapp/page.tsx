@@ -341,15 +341,16 @@ export default function WhatsAppPage() {
   const headerBorderColor = isDark ? "border-[#111b21]" : "border-[#d1d5db]";
   const messageBgLeft = isDark ? "bg-[#2f343b]" : "bg-white";
   const messageTextLeft = isDark ? "text-[#d1d5db]" : "text-[#111827]";
-  const messageBgRight = isDark ? "bg-[#054640]" : "bg-[#a7ff9e]";
+  const messageBgRight = isDark ? "bg-[#054640]" : "bg-[#a9feb3]";
   const messageTextRight = isDark ? "text-white" : "text-[#111827]";
   const textColor = isDark ? "text-white" : "text-[#111827]";
   const secondaryTextColor = isDark ? "text-[#bdc3c8]" : "text-[#657786]";
 
   return (
     <div
-      className={`h-screen relative ${bgColor} flex flex-col overflow-x-hidden ${roboto.className}`}
+      className={`h-screen relative w-full max-w-full ${bgColor} flex flex-col overflow-x-hidden ${roboto.className}`}
       style={{
+        overflowX: "hidden",
         backgroundImage: `url(${isDark ? "/whatsapp-dark.png" : "/whatsapp-light.png"})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -366,6 +367,7 @@ export default function WhatsAppPage() {
               src="/rishabhdas.jpeg"
               alt="Rishabh Das"
               fill
+              sizes="44px"
               className="object-cover"
             />
           ) : otherUser === "Manushree" ? (
@@ -373,6 +375,7 @@ export default function WhatsAppPage() {
               src="/manushree.png"
               alt="Manushree"
               fill
+              sizes="44px"
               className="object-cover"
             />
           ) : (
@@ -522,7 +525,7 @@ export default function WhatsAppPage() {
       {activeTab === "chat" ? (
         <div
           ref={messagesContainerRef}
-          className={`flex-1 min-h-0 min-w-0 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 pt-20 space-y-2 ${isDark ? "" : "bg-transparent"}`}
+          className={`flex-1 min-h-0 min-w-0 overflow-y-auto overflow-x-hidden px-3 py-4 sm:px-4 sm:py-5 pt-20 space-y-2 ${isDark ? "" : "bg-transparent"}`}
         >
           {stickyDate && (
             <div className="sticky top-0 z-20 flex justify-center pb-2 bg-transparent">
@@ -592,7 +595,7 @@ export default function WhatsAppPage() {
                     }}
                   >
                     <div
-                      className={`max-w-[85%] sm:max-w-xs px-3 py-2 rounded-xl transition-all ${
+                      className={`max-w-[85%] sm:max-w-xs min-w-0 overflow-hidden px-3 py-2 rounded-xl transition-all ${
                         isCurrentSearchResult
                           ? "ring-2 ring-yellow-400 shadow-lg"
                           : ""
@@ -602,14 +605,14 @@ export default function WhatsAppPage() {
                           : `${messageBgLeft} ${messageTextLeft} rounded-bl-none`
                       }`}
                     >
-                      <div className="flex items-center gap-2 text-sm wrap-break-word whitespace-pre-wrap leading-5">
+                      <div className="flex items-center gap-2 text-sm break-all whitespace-pre-wrap leading-5 w-full overflow-hidden">
                         {deleted && (
                           <DoNotDisturbIcon
                             className={`w-4 h-4 ${isDark ? "text-[#8696a0]" : "text-gray-500"}`}
                           />
                         )}
                         <span
-                          className={`${deleted ? (isDark ? "text-[#d1d5d9]" : "text-[#374151]") : ""}`}
+                          className={`${deleted ? (isDark ? "text-[#d1d5d9]" : "text-[#374151]") : ""} break-all`}
                         >
                           {deleted
                             ? displayText
@@ -640,7 +643,7 @@ export default function WhatsAppPage() {
       ) : (
         <div
           ref={messagesContainerRef}
-          className={`flex-1 min-h-0 min-w-0 overflow-y-auto px-3 py-4 sm:px-4 sm:py-5 ${isDark ? "" : "bg-transparent"}`}
+          className={`flex-1 min-h-0 min-w-0 overflow-y-auto overflow-x-hidden px-3 py-4 sm:px-4 sm:py-5 ${isDark ? "" : "bg-transparent"}`}
         >
           <div className="mb-4">
             <div
