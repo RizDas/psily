@@ -6,8 +6,8 @@ const IMAGES = [
   "/gallery/saraswati puja.jpg",
   "/gallery/acropolis 1month anniv.jpg",
   "/gallery/end of bday week.png",
-  "/gallery/mon meetup near home.jpg",
-  "/gallery/cove.jpg",
+  "/gallery/near home mon meetup.png",
+  "/gallery/cove1.png",
 ];
 
 export default function GalleryPage() {
