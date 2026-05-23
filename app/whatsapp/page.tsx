@@ -349,7 +349,7 @@ export default function WhatsAppPage() {
   const headerBorderColor = isDark ? "border-[#111b21]" : "border-[#d1d5db]";
   const messageBgLeft = isDark ? "bg-[#2f343b]" : "bg-white";
   const messageTextLeft = isDark ? "text-[#d1d5db]" : "text-[#111827]";
-  const messageBgRight = isDark ? "bg-[#144D37]" : "bg-[#a3e7ab]";
+  const messageBgRight = isDark ? "bg-[#144D37]" : "bg-[#aef6b6]";
   const messageTextRight = isDark ? "text-white" : "text-[#111827]";
   const textColor = isDark ? "text-white" : "text-[#111827]";
   const secondaryTextColor = isDark ? "text-[#bdc3c8]" : "text-[#657786]";
