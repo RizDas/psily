@@ -110,7 +110,7 @@ export const timeline = [
     date: "28/4/2026",
     title: "near home meet and warning",
     description:
-      "i went near her home, and was waiting for her to come. Suddenly someone came from behind, and warned me and asked me to leave. it was CRAZY ! when she came out, she looked so beautiful, and she was very tensed, but we still had a shirt and lovely time together.",
+      "i went near her home, and was waiting for her to come. Suddenly someone came from behind, and warned me and asked me to leave. it was CRAZY ! when she came out, she looked so beautiful, and she was very tensed, but we still had a short and lovely time together.",
   },
   {
     id: 17,
@@ -148,6 +148,12 @@ export const timeline = [
     id: 22,
     date: "21/5/2026",
     title: "FIRST KISS❣️",
+    description: "to be written-",
+  },
+  {
+    id: 23,
+    date: "22/5/2026",
+    title: "Gaming Together",
     description: "to be written-",
   },
 ];
