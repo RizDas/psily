@@ -156,4 +156,22 @@ export const timeline = [
     title: "Gaming Together",
     description: "to be written-",
   },
+  {
+    id: 24,
+    date: "25/5/2026",
+    title: "Meet before Tution",
+    description: "to be written-",
+  },
+  {
+    id: 25,
+    date: "26/5/2026",
+    title: "Cycling together ❤️‍🩹",
+    description: "to be written-",
+  },
+  {
+    id: 26,
+    date: "4/6/2026",
+    title: "And the Oscar goes to...",
+    description: "to be written-",
+  },
 ];
