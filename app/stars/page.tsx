@@ -22,13 +22,15 @@ function ordinal(n: number) {
 /* ── colour palette for stars ────────────────────────── */
 const STAR_HUES: Record<string, { fill: string; stroke: string }> = {
   blush: { fill: "#e8c4b8", stroke: "#c8947e" },
-  sand: { fill: "#d4b8a0", stroke: "#b8937a" },
   lavender: { fill: "#c9b8d0", stroke: "#a890b0" },
-  sage: { fill: "#b8ccc4", stroke: "#90a89c" },
   gold: { fill: "#e0c8a8", stroke: "#c0a480" },
   rose: { fill: "#d0b0b8", stroke: "#b08890" },
   grey: { fill: "#c8c0b0", stroke: "#a89880" },
   mauve: { fill: "#d8c0c8", stroke: "#b89ca8" },
+  ylw: { fill: "#dddd00", stroke: "#dddd00" },
+  pnk: { fill: "#ffb0ba", stroke: "#ffb0ba" },
+  blu: { fill: "#59aeeb", stroke: "#59aeeb" },
+  org: { fill: "#fab025", stroke: "#fab025" },
 };
 const PRESET_KEYS = Object.keys(STAR_HUES);
 
@@ -310,7 +312,7 @@ export default function StarsPage() {
                   justifyContent: "center",
                 }}
               >
-                <svg width="30" height="30" viewBox="0 0 100 100">
+                <svg width="50" height="50" viewBox="0 0 100 100">
                   <polygon
                     points="50,6 61,38 95,38 67,58 78,91 50,72 22,91 33,58 5,38 39,38"
                     fill={getStarColor(openStar).fill}
@@ -318,30 +320,24 @@ export default function StarsPage() {
                     strokeWidth="2"
                     strokeLinejoin="round"
                   />
+                  <text
+                    x="50"
+                    y="55"
+                    dominantBaseline="middle"
+                    textAnchor="middle"
+                    fill="#000000"
+                    fontSize="24"
+                    fontWeight="bold"
+                    fontFamily="var(--font-dancing), var(--font-cedarville), cursive"
+                    style={{
+                      userSelect: "none",
+                      pointerEvents: "none",
+                    }}
+                  >
+                    {openStar.day}
+                  </text>
                 </svg>
               </div>
-
-              {/* date & day label */}
-              <p
-                style={{
-                  fontFamily: "var(--font-geist-sans), sans-serif",
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.18em",
-                  textTransform: "uppercase",
-                  color: "#9a6850",
-                  opacity: 0.6,
-                  marginBottom: "6px",
-                  textAlign: "center",
-                }}
-              >
-                {openStar.date} — {ordinal(openStar.day)} star
-              </p>
-
-              {/* decorative thin rule */}
-              <span
-                className="thin-rule"
-                style={{ marginBottom: "22px", width: "28px" }}
-              />
 
               {/* the actual note content */}
               {openStar.note ? (
