@@ -162,7 +162,123 @@ export default function Home() {
 
       {/* ── LOVE LETTER ────────────────────────────────────── */}
       <LoveLetter />
+      {/* ── EXPLORE MORE ───────────────────────────────────── */}
+      <section
+        className="flex flex-col items-center justify-center text-center"
+        style={{
+          padding: "60px clamp(24px, 6vw, 80px)",
+          background: "rgba(255, 250, 247, 0.7)",
+        }}
+      >
+        <div style={{ maxWidth: "680px", margin: "0 auto" }}>
+          <h2
+            style={{
+              fontFamily: "var(--font-dancing)",
+              fontSize: "clamp(2rem, 4.5vw, 3rem)",
+              color: "#3e1c2a",
+              lineHeight: 1.1,
+              marginBottom: "18px",
+            }}
+          >
+            A little more to explore
+          </h2>
+          <p
+            style={{
+              fontFamily: "var(--font-lora)",
+              fontStyle: "italic",
+              fontSize: "clamp(1rem, 2vw, 1.05rem)",
+              color: "#5f2d41",
+              opacity: 0.85,
+              lineHeight: 1.8,
+              margin: "0 auto",
+              maxWidth: "520px",
+            }}
+          >
+            There are two small corners of this story I’ve carefully made for
+            us: our moments in a gallery and thirty folded stars holding tiny
+            notes.
+          </p>
 
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: "18px",
+              marginTop: "32px",
+            }}
+          >
+            <Link
+              href="/gallery"
+              className="inline-flex items-center justify-center rounded-3xl border border-[#d8a9a6] px-6 py-5 text-left text-[#3e1c2a] transition hover:bg-[#f5e8e5]"
+              style={{
+                background: "rgba(252, 245, 242, 0.95)",
+                boxShadow: "0 18px 40px rgba(130, 75, 40, 0.08)",
+              }}
+            >
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-geist-sans), sans-serif",
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: "#8a3858",
+                    marginBottom: "12px",
+                  }}
+                >
+                  Gallery
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-lora)",
+                    fontStyle: "italic",
+                    fontSize: "1rem",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Warm memories, quiet evenings, and little moments that feel
+                  like home.
+                </p>
+              </div>
+            </Link>
+
+            <Link
+              href="/stars"
+              className="inline-flex items-center justify-center rounded-3xl border border-[#d8a385] px-6 py-5 text-left text-[#3e1c2a] transition hover:bg-[#f9f0ee]"
+              style={{
+                background: "rgba(255, 249, 244, 0.97)",
+                boxShadow: "0 18px 40px rgba(130, 75, 40, 0.08)",
+              }}
+            >
+              <div>
+                <p
+                  style={{
+                    fontFamily: "var(--font-geist-sans), sans-serif",
+                    fontSize: "0.75rem",
+                    letterSpacing: "0.18em",
+                    textTransform: "uppercase",
+                    color: "#8a3858",
+                    marginBottom: "12px",
+                  }}
+                >
+                  Stars
+                </p>
+                <p
+                  style={{
+                    fontFamily: "var(--font-lora)",
+                    fontStyle: "italic",
+                    fontSize: "1rem",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Thirty folded paper stars, each holding one small note that
+                  you made.
+                </p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
       {/* ── CLOSING ────────────────────────────────────────── */}
       <section
         className="min-h-screen flex flex-col items-center justify-center text-center"
