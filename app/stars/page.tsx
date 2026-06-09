@@ -371,7 +371,8 @@ export default function StarsPage() {
             <div
               className="note-content"
               style={{
-                padding: "clamp(24px, 6vw, 40px) clamp(22px, 5.5vw, 36px) clamp(22px, 5.5vw, 36px)",
+                padding:
+                  "clamp(24px, 6vw, 40px) clamp(22px, 5.5vw, 36px) clamp(22px, 5.5vw, 36px)",
                 borderRadius: "8px",
                 position: "relative",
                 background: getStarColor(openStar).fill,
