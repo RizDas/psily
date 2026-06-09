@@ -21,16 +21,11 @@ function ordinal(n: number) {
 
 /* ── colour palette for stars ────────────────────────── */
 const STAR_HUES: Record<string, { fill: string; stroke: string }> = {
-  blush: { fill: "#e8c4b8", stroke: "#c8947e" },
-  lavender: { fill: "#c9b8d0", stroke: "#a890b0" },
-  gold: { fill: "#e0c8a8", stroke: "#c0a480" },
-  rose: { fill: "#d0b0b8", stroke: "#b08890" },
-  grey: { fill: "#c8c0b0", stroke: "#a89880" },
-  mauve: { fill: "#d8c0c8", stroke: "#b89ca8" },
-  ylw: { fill: "#dddd00", stroke: "#dddd00" },
-  pnk: { fill: "#ffb0ba", stroke: "#ffb0ba" },
-  blu: { fill: "#59aeeb", stroke: "#59aeeb" },
-  org: { fill: "#fab025", stroke: "#fab025" },
+  ylw: { fill: "#e7e751", stroke: "#e7e751" },
+  pnk: { fill: "#de9aa4", stroke: "#de9aa4" },
+  blu: { fill: "#84b6d3", stroke: "#84b6d3" },
+  org: { fill: "#f8b946", stroke: "#f8b946" },
+  grn: { fill: "#65d66d", stroke: "#65d66d" },
 };
 const PRESET_KEYS = Object.keys(STAR_HUES);
 
