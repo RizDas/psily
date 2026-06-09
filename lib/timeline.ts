@@ -174,4 +174,10 @@ export const timeline = [
     title: "And the Oscar goes to...",
     description: "to be written-",
   },
+  {
+    id: 27,
+    date: "9/6/2026",
+    title: "Quick Evening Walk",
+    description: "to be written-",
+  },
 ];
