@@ -65,7 +65,14 @@ export default function TimeCounter() {
   }, []);
 
   return (
-    <div style={{ maxWidth: "540px", width: "100%", textAlign: "center" }}>
+    <div
+      style={{
+        maxWidth: "540px",
+        width: "100%",
+        textAlign: "center",
+        padding: "0 clamp(12px, 4vw, 20px)",
+      }}
+    >
       {/* Heading — only this uses Dancing Script */}
       <p
         style={{
@@ -97,8 +104,9 @@ export default function TimeCounter() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          gap: "18px",
+          gap: "clamp(8px, 2vw, 18px)",
           marginBottom: "18px",
+          flexWrap: "wrap",
         }}
       >
         {/* Months */}

@@ -316,7 +316,7 @@ export default function Home() {
           style={{
             fontFamily: "var(--font-lora)",
             fontStyle: "italic",
-            fontSize: "6px",
+            fontSize: "12px",
             color: "#6a2840",
             opacity: 0.7,
             maxWidth: "340px",
