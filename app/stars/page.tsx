@@ -109,7 +109,7 @@ export default function StarsPage() {
             marginBottom: "18px",
           }}
         >
-          30 stars · 30 days · each one hers
+          30 stars · 30 days
         </p>
 
         <h1
@@ -331,7 +331,7 @@ export default function StarsPage() {
             opacity: 0.45,
           }}
         >
-          every star means the world.
+          thank you so much. every star means the world to me.
         </p>
       </section>
 
