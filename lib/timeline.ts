@@ -180,4 +180,16 @@ export const timeline = [
     title: "Quick Evening Walk",
     description: "to be written-",
   },
+  {
+    id: 28,
+    date: "10/6/2026",
+    title: "The Story and crazy bristi",
+    description: "to be written-",
+  },
+  {
+    id: 29,
+    date: "13/6/2026",
+    title: "The Proposal and Caught Her Off Guard",
+    description: "to be written-",
+  },
 ];
