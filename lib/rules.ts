@@ -159,7 +159,7 @@ export const ARTICLES: RuleArticle[] = [
   {
     numeral: "V",
     title:
-      "On Maintaining Appropriate Boundaries with Prior and Potential Romantic Interests",
+      "On Maintaining Appropriate Boundaries with Prior and Potential Interests",
     provision:
       "To preserve the trust, peace, and exclusivity of our bond, we shall choose one another over ties that may awaken doubt, insecurity, or fear in each others' hearts.",
     sections: [
