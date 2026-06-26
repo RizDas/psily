@@ -185,4 +185,32 @@ export const ARTICLES: RuleArticle[] = [
       },
     ],
   },
+  {
+    numeral: "VI",
+    title: "On Boundaries, Space, and Affection",
+    provision:
+      "We shall honor each other's boundaries and space, while never allowing distance to diminish our affection, closeness, or devotion.",
+    sections: [
+      {
+        title: "The Principle",
+        text: "The Parties acknowledge that love thrives through both togetherness and individuality, and that respecting boundaries strengthens their bond.",
+      },
+      {
+        title: "The Obligation",
+        text: "Each Party shall respect the other's boundaries and need for space while continuing to offer love, affection, and reassurance.",
+      },
+      {
+        title: "The Interpretation",
+        text: "A desire for personal space shall not be construed as diminished love, nor shall affectionate clinginess be deemed burdensome when expressed with mutual comfort and consideration.",
+      },
+      {
+        title: "The Exception",
+        text: "Temporary needs for greater solitude or closeness due to personal circumstances shall not constitute a breach of this Article, provided they are communicated in good faith.",
+      },
+      {
+        title: "Spirit of the Article",
+        text: "This Article embodies the understanding that true love gives room to breathe without letting go.",
+      },
+    ],
+  },
 ];
