@@ -192,4 +192,22 @@ export const timeline = [
     title: "The Proposal and Caught Her Off Guard",
     description: "to be written-",
   },
+  {
+    id: 29,
+    date: "25/6/2026",
+    title: "3 MONTHS TOGETHER YAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY 💗",
+    description: "to be written-",
+  },
+  {
+    id: 29,
+    date: "1/7/2026",
+    title: "she gave me THE LETTER 🥹",
+    description: "to be written-",
+  },
+  {
+    id: 29,
+    date: "7/7/2026",
+    title: "...wow 🥵",
+    description: "to be written-",
+  },
 ];
