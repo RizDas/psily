@@ -130,7 +130,7 @@ export const timeline = [
     id: 19,
     date: "10/5/2026",
     title: "best bday ever",
-    description: "to be written-",
+    description: "my first bday with her, and it was the best bday ever. ",
   },
   {
     id: 20,
@@ -193,21 +193,33 @@ export const timeline = [
     description: "to be written-",
   },
   {
-    id: 29,
+    id: 30,
     date: "25/6/2026",
     title: "3 MONTHS TOGETHER YAYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY 💗",
     description: "to be written-",
   },
   {
-    id: 29,
+    id: 31,
     date: "1/7/2026",
     title: "she gave me THE LETTER 🥹",
     description: "to be written-",
   },
   {
-    id: 29,
+    id: 32,
     date: "7/7/2026",
     title: "...wow 🥵",
+    description: "to be written-",
+  },
+  {
+    id: 33,
+    date: "10/7/2026",
+    title: "MARK 🫣",
+    description: "to be written-",
+  },
+  {
+    id: 34,
+    date: "11/7/2026",
+    title: "Crochet sunflower !!!",
     description: "to be written-",
   },
 ];
