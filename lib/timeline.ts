@@ -148,7 +148,7 @@ export const timeline = [
     id: 22,
     date: "21/5/2026",
     title: "FIRST KISS❣️",
-    description: "After School, we wont to our Cove... and doing stuff 🫣... and cozying around. we were very close, could feel each other's breaths... our eyes fluttering...  and it just suddenly HAPPENED. we kissed. WE KISSED. WE. KISSED. 😳🫣 (damn)",
+    description: "After School, we went to our Cove... and doing stuff 🫣... and cozying around. we were very close (zero molecules)... our eyes fluttering...  and it just suddenly HAPPENED. we kissed. WE KISSED. WE. KISSED. 😳🫣 (damn)",
   },
   {
     id: 23,
@@ -160,7 +160,7 @@ export const timeline = [
     id: 24,
     date: "25/5/2026",
     title: "Meet before Tution",
-    description: "to be written-",
+    description: "I went to her home (no one was there) 😁. It was the first time i saw her in her home clothes irl 😍 (oh she is stunning!!!) she gave me small flowers and a lemon leaf 🥹 (i still hv them ofc)... then we were 'exploring' outside the house. maybe doing stuff 😏... we could feel each other's breaths, and kissed like the world would end that day 🥵😳",
   },
   {
     id: 25,
