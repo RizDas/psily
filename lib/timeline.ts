@@ -130,13 +130,13 @@ export const timeline = [
     id: 19,
     date: "10/5/2026",
     title: "best bday ever",
-    description: "my first bday with her, and it was the best bday ever. ",
+    description: "my first bday with her, and it was the best bday ever. The day started... with out first SPOTIFY DATE 💗. we stayed up until 3 am... listening to THE SAME SONGS, TOGETHER AAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH. it was so dreamy and fun and so blissful experience ❤️ We lip synced, vibing and finding meanings of songs together, with each other. IT WAS SO LOVELY!!! for the first time, i felt like that day was really special. She made my day so so sooooooo amazing. MWAH ❤️",
   },
   {
     id: 20,
     date: "16/5/2026",
     title: "end of bday week",
-    description: "to be written-",
+    description: "ok, i am trying to keep it short... BUT SHE IS NOT MAKING IT POSSIBLE! she gave me a watch... A WATCH... AN. ACTUAL. POCKET. WATCH!!! I got her 3 roses, but like everytime, SHE ALWAYS OUTSHINES ME 😁 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHH 💗💗💗. This will be my timepiece FOREVER !!! ",
   },
   {
     id: 21,
@@ -220,6 +220,18 @@ export const timeline = [
     id: 34,
     date: "11/7/2026",
     title: "Crochet sunflower !!!",
+    description: "to be written-",
+  },
+  {
+    id: 35,
+    date: "16/7/2026",
+    title: "First Fest Together (and parents... 💀)",
+    description: "to be written-",
+  },
+  {
+    id: 36,
+    date: "23/7/2026",
+    title: "I lifted her (He He 😁)",
     description: "to be written-",
   },
 ];
